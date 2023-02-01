@@ -1,0 +1,94 @@
+.profile-container {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    grid-template-rows: 1fr 2fr 2fr;
+    grid-template-areas: 
+    "background  friend"
+    "about  friend"
+    "project  friend";
+    gap: 20px;
+}
+
+@media screen and (max-width: 620px) {
+    .profile-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 2fr 2fr 1fr;
+        grid-template-areas: 
+        "background"
+        "about"
+        "project"
+        "friend";
+        gap: 20px;
+    }
+}
+.profile-container .info-box {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.background-container {
+    height: 150px;
+    grid-area: "background";
+    background: url('https://cdn.pixabay.com/photo/2016/11/01/18/38/background-1789175__480.png');
+    color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.about-container {
+    grid-area: about;
+}
+
+.project-container {
+    grid-area: project;
+}
+
+.friend-box {
+    grid-area: friend;
+}
+
+
+.avatar-container {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border-color: aliceblue;
+    border-width: 5px;
+    border-style: solid;
+    background-color: white;
+    background-position: center;
+}
+
+.person-card-box {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    gap: 30px;
+}
+
+.name-box {
+    height: fit-content;
+    font-size: large;
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+}
+
+.name-box p {
+    margin: 5px 0;
+}
+.education-box {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.education-box p{
+    font-size: small;
+}
+.education-box img{
+    border-radius: 2px;
+}

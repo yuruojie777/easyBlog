@@ -1,17 +1,66 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import Root from "./routes/root";
+import ErrorPage from "./error-page";
+import ReactDOM from "react-dom/client";
+import {
+  createBrowserRouter,
+  RouterProvider,
+} from "react-router-dom";
+import "./index.css";
+import { Blog } from "./blog/blog";
+import { Profile } from "./profile/profile";
+import { New } from "./new/new";
+import { BlogCreatorPage } from "./blog/blogCreatorPage";
+import { Login } from "./login/login";
+import { article } from "./data";
+import { Article, loader as articleLoader } from "./blog/article";
+import { Home } from "./home/home";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Root />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "/",
+        element: <Home/>
+      },
+      {
+        path: "blog",
+        element: <Blog/>,
+        loader: article,
+        children: [
+          {
+            path: ':blogId',
+            element: <Article/>,
+            loader: articleLoader
+          }
+        ]
+      },
+      {
+        path: "blog/new",
+        element: <BlogCreatorPage/>,
+      },
+      {
+        path: "profile",
+        element: <Profile/>
+      },
+      {
+        path: "new",
+        element: <New/>
+      }
+    ],
+  },
+  {
+    path: '/login',
+    element: <Login/>
+  }
+]);
+document.body.style.backgroundColor='white';
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
-
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
