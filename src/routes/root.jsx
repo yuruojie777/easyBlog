@@ -71,7 +71,7 @@ export default function Root() {
         <div className="hidden-bars-box">
           <div className="hidden-bars" id="hidden-bars">
             <Link to="/">HOME</Link>
-            <Link to="/blog">BLOG</Link>
+            <Link to="/blog/1">BLOG</Link>
             <Link to="/profile">PROFILE</Link>
             <Link to="/new">NEW</Link>
           </div>
