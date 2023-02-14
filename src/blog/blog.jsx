@@ -29,9 +29,9 @@ export const Blog = () => {
                 <div style={style}>
                     <h3 style={{textAlign:'center'}}>Content</h3>
                     {article().length===0?<p>No content yet</p>:
-                        <ul style={{padding:'0', textAlign:'center'}}>
+                        <ul>
                             {article().map((item)=>{return (
-                                <li key={item.id}><NavLink to={`/blog/${item.id}`} style={{textDecoration:'none', color:'black', fontWeight:'bold'}}>{item.title}</NavLink></li>
+                                <li key={item.id}><NavLink to={`/blog/${item.id}`}>{item.title}</NavLink></li>
                             )
                             })}
                         </ul>

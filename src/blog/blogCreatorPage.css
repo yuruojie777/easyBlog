@@ -40,3 +40,20 @@
     cursor: pointer;
     margin: 3px;
 }
+
+.g-progress {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    background: conic-gradient(#FFCDB2 0, #FFCDB2 25%, #B5838D 25%, #B5838D);
+    mask: radial-gradient(transparent, transparent 60%, #000 60%, #000 0);
+
+    transition-duration: 1s;
+    transition-delay: 5s;
+    transition-timing-function: ease
+
+}
+
+.g-progress:hover{
+    background: conic-gradient(#FFCDB2 0, #FFCDB2 100%, #B5838D 0%, #B5838D);
+}

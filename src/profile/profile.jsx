@@ -7,7 +7,7 @@ export const Profile = () => {
     <div className='profile-container'>
       <div className='background-container info-box'>
         <div className='person-card-box'>
-          <div className='avatar-container' style={{backgroundImage:"url('resource/me.jpg')", backgroundSize:'cover'}}></div>
+          <div className='avatar-container' style={{backgroundColor:"pink", backgroundImage:"url('resource/me.jpg')", backgroundSize:'cover'}}></div>
           <span className="name-box">
             <p>Ruojie Yu</p>
             <div className='education-box'>

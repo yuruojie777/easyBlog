@@ -58,7 +58,7 @@ export const BlogCreatorPage = () => {
                 <button type='button' style={{backgroundColor:'green'}}>Save as draft</button>
             </div>
         </Form>
-
+        <div className='g-progress'></div>
     </div>
   )
 }

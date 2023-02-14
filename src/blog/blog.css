@@ -6,9 +6,9 @@
 }
 
 .blog-container li {
-    margin: 10px;
     list-style: none;
 }
+
 
 .blog-box {
     display: grid;
@@ -22,15 +22,34 @@
 .blog-container #content-box {
     grid-area: content-area;
 }
+
+#title-box ul {
+    margin: 0;
+    padding: 0;
+}
+
+#title-box li {
+    display: list-item;
+    margin: 5px;
+}
 #title-box a {
+    display: block;
+    box-sizing: inherit;
     padding: 5px;
     border-radius: 5px;
+    text-decoration: none; 
+    color:black;
+    font-weight: bold
+}
+#title-box a:hover{
+    background-color: rgb(235, 242, 242);
+    color: rgb(0, 102, 204);
 }
 #title-box .active {
-    background-color: black;
+    background-color: black!important;
     color: white !important;
 }
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1110px) {
     .blog-box {
         grid-template-columns: 1fr;
         grid-template-areas: "content-area";

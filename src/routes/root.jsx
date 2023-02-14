@@ -1,5 +1,6 @@
 import { useState } from "react";
 import {Select} from 'antd';
+import { GithubOutlined, InstagramOutlined, LinkedinOutlined } from '@ant-design/icons';
 import { Outlet, NavLink, useNavigate, Link} from "react-router-dom";
 import './root.css';
 
@@ -30,7 +31,7 @@ export default function Root() {
                 <NavLink to="/" id="home">Home</NavLink>
               </li>
               <li>
-                <NavLink to="/blog" id="blog">Blog</NavLink>
+                <NavLink to="/blog/1" id="blog">Blog</NavLink>
               </li>
               <li>
                 <NavLink to="/profile" id="profile">Profile</NavLink>
@@ -40,7 +41,8 @@ export default function Root() {
               </li>
             </ul>
           </nav>
-          <div style={{display:'flex', flexDirection:'row', gap:'10px'}}>
+          <div className="fill-up"></div>
+          <div className="button-box">
             <button className="login-btn" onClick={()=>navigate('/login')}>
               login
             </button>
@@ -78,7 +80,14 @@ export default function Root() {
         <div id="detail">
           <Outlet />
         </div>
-
+        <footer>
+          <div>
+            <GithubOutlined className="website-icon"/>
+            <InstagramOutlined className="website-icon"/>
+            <LinkedinOutlined className="website-icon"/>
+          </div>
+          <p>©2022-2023 yuruojie. All rights reserved.</p>
+        </footer>
       </div>
     );
   }
