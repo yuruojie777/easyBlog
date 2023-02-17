@@ -25,7 +25,7 @@ export const Gate = () => {
               </button>
             </div>
             <div>
-              <p style={{marginTop: "40px"}}>If you don't have account.Please</p>
+              <p style={{marginTop: "40px"}}>If you don't have an account.Please</p>
               <p>Click here to <a id="signin" onClick={handleFlip}>Sign Up</a></p>
             </div>
           </form>
@@ -42,7 +42,7 @@ export const Gate = () => {
               </button>
             </div>
             <div>
-              <p style={{marginTop: "40px"}}>Have a account ? You can</p>
+              <p style={{marginTop: "40px"}}>Have an account ? You can</p>
               <p>Click here to <a id="login" onClick={handleFlip}>Log in</a></p>
             </div>
           </form>
