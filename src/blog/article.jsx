@@ -12,7 +12,6 @@ export const Article = () => {
     const article_list = useLoaderData();
     const [fontStyle, setFontStyle] = useState("'Shantell Sans', cursive");
     const handleChange = (value) => {
-      console.log(`selected ${value}`);
       setFontStyle(value)
     };
   return (

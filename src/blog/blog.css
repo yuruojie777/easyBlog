@@ -63,8 +63,7 @@
 }
 @media screen and (max-width: 1195px) {
     .blog-box {
-        grid-template-columns: 1fr;
-        grid-template-areas: "content-area";
+        display: block;
     }
     .blog-container #title-box {
         display: none;
