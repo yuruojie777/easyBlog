@@ -15,6 +15,7 @@ import { Login } from "./login/login";
 import { article } from "./data";
 import { Article, loader as articleLoader } from "./blog/article";
 import { Home } from "./home/home";
+import { Gate } from "./login/gate";
 
 
 const router = createBrowserRouter([
@@ -55,7 +56,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/login',
-    element: <Login/>
+    element: <Gate/>
   }
 ]);
 document.body.style.backgroundColor='white';

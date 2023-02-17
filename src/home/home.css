@@ -2,10 +2,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 4fr;
     grid-template-areas: 
     "weather calendar"
-    "another calendar";
+    "another calendar"
+    "post post";
 }
 
 @media screen and (max-width: 455px) {
@@ -13,11 +14,12 @@
         display: grid;
         gap: 10px;
         grid-template-columns: 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
         grid-template-areas: 
         "calendar"
         "weather"
-        "another";
+        "another"
+        "post";
     }
 }
 
@@ -38,6 +40,11 @@
     background-position: center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.recent-post-box {
+    grid-area: post;
+
 }
 
 .home-box {

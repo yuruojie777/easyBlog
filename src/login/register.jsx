@@ -1,42 +1,40 @@
+import React from 'react'
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Checkbox, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
+export const Register = () => {
+
+    const navigate = useNavigate();
+    const onFinish = (values) => {
+        console.log('Received values of form: ', values);
+        navigate('/')
+      };
 
 
-export const Login = () => {
-  const navigate = useNavigate();
-  const onFinish = (values) => {
-      console.log('Received values of form: ', values);
-      navigate('/')
-    };
-  const onFinishFailed = (errorInfo) => {
-    console.log('Failed:', errorInfo);
-  };
-
-  function handleOnClick() {
-    const card = document.getElementById('card')
-    if(card.classList.contains('active')) card.classList.remove('active')
-    else card.classList.add('active')
-}
+      function handleOnClick() {
+        const card = document.getElementById('card')
+        if(card.classList.contains('active')) card.classList.remove('active')
+        else card.classList.add('active')
+    }
   return (
 
-      <div className='form-box login-form'>
-        <h3>Login</h3>
+    <div className='form-box register-form'>
+        <h3>Register</h3>
         <Form
           name="normal_login"
-          className="login-inside-form"
+          className="register-inside-form"
           initialValues={{ remember: true }}
           onFinish={onFinish}
         >
           <Form.Item
             name="username"
-            rules={[{ required: true, message: 'Please input your login Username!' }]}
+            rules={[{ required: true, message: 'Please input your Username!' }]}
           >
             <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Username" />
           </Form.Item>
           <Form.Item
             name="password"
-            rules={[{ required: true, message: 'Please input your login Password!' }]}
+            rules={[{ required: true, message: 'Please input your Password!' }]}
           >
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
@@ -58,9 +56,9 @@ export const Login = () => {
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in
             </Button>
-            Or <div  onClick={handleOnClick}>register now!</div>
+            Or <div onClick={handleOnClick}>login now!</div>
           </Form.Item>
         </Form>
       </div>
-)
-};
+  )
+}

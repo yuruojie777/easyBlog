@@ -3,9 +3,6 @@
     flex-direction: column;
     row-gap: 10px;
     border: none;
-    /* border-color: black;
-    border-width: 2px;
-    border-style: dashed; */
 }
 .title-box {
     padding: 20px;

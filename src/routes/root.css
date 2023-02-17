@@ -1,9 +1,13 @@
+
 .container {
-    padding-left: 70px;
-    padding-right: 70px;
+    margin: auto;
+    width: 60vw;
 }
 
-@media screen and (max-width: 620px){
+@media screen and (max-width: 687px){
+    .container {
+        width: 100%;
+    }
     nav{
         display: none;
     }
@@ -42,7 +46,7 @@
     padding-left: 25px;
     padding-right: 25px;
     background-color: black;
-    margin-bottom: 2px;
+    margin-bottom: 10px;
     border-radius: 10px;
 }
 
@@ -178,7 +182,7 @@
 }
 
 
-footer {
+.container footer {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -190,7 +194,7 @@ footer {
     border-radius: 10px;
 }
 
-footer div{
+.container footer div{
     display: flex;
     flex-direction: row;
     gap: 10px;
@@ -198,19 +202,19 @@ footer div{
     justify-content: center;
 }
 
-footer p {
+.container footer p {
     margin: 0!important;
     color: white;
     font-size: small;
     font-weight: bolder;
 }
 
-footer .website-icon {
+.container footer .website-icon {
     cursor: pointer;
     font-size: larger;
     color: white
 }
 
-footer .website-icon:hover {
+.container footer .website-icon:hover {
     color: black
 }

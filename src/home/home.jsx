@@ -17,6 +17,9 @@ export const Home = () => {
         <div className='home-container'>
             <div className='weather-box home-box'></div>
             <div className='another-box home-box'></div>
+            <div className='recent-post-box home-box'>
+              
+            </div>
             <div className='calendar-box home-box'><Calendar onPanelChange={onPanelChange} fullscreen={false}/></div>
         </div>
         
