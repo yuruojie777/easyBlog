@@ -1,7 +1,5 @@
 import React from 'react'
 import './gate.css'
-import { Register } from '../login/register';
-import { Login } from '../login/login';
 
 export const Gate = () => {
 
