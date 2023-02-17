@@ -11,7 +11,9 @@ export const Profile = () => {
           <span className="name-box">
             <p>Ruojie Yu</p>
             <div className='education-box'>
-              <img  width="24px" height="24px" src='https://media.licdn.com/dms/image/C560BAQHbPUZaDAMT6g/company-logo_100_100/0/1646696237089?e=1683158400&v=beta&t=1tH1oIZG4PMUc7LO_dw6q_TXoTJ8FVfTPsCa37sKcD4'/>
+              <img  width="24px" height="24px"
+                    alt="me"
+                    src='https://media.licdn.com/dms/image/C560BAQHbPUZaDAMT6g/company-logo_100_100/0/1646696237089?e=1683158400&v=beta&t=1tH1oIZG4PMUc7LO_dw6q_TXoTJ8FVfTPsCa37sKcD4'/>
               <p>University of Sydney</p>            
             </div>
           </span>

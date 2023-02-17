@@ -1,23 +1,77 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './gate.css'
+import axios from "axios";
+import Cookies from 'universal-cookie';
 
 export const Gate = () => {
+
+  const [loginUserName, setLoginUserName] = useState();
+  const [loginPassword, setLoginPassword] = useState();
+  const [signUpUserName, setSignUpUserName] = useState();
+  const [signUpPassword, setSignUpPassword] = useState();
+
 
   function handleFlip() {
     const form = document.getElementById('middle')
     if(!form.classList.contains("middle-flip")) form.classList.add("middle-flip")
     else form.classList.remove("middle-flip")
   }
+
+  function handleOnLoginSubmit(e) {
+    e.preventDefault();
+    const form = {
+      username: loginUserName,
+      password: loginPassword
+    }
+
+    axios.post("http://localhost:8082/api/v1/auth/authenticate", form)
+        .then(res=>{
+          console.log(res.data)
+          return res.data
+        })
+        .then(data=>{
+          console.log(new Date().toUTCString())
+          const cookies = new Cookies()
+          cookies.set('token', data.token, {path: '/', secure: true, maxAge : 3600 * 24})
+          console.log(cookies.get('token'))
+        })
+        .catch(err=>{
+          console.log(err.toJSON())
+          console.log(err.response.status)
+          alert(err.response.status)
+        })
+  }
+
+  function handleOnSignUpSubmit(e) {
+    e.preventDefault();
+    const form = {
+      name: signUpUserName,
+      username: signUpUserName,
+      password: signUpPassword
+    }
+
+    axios.post("http://localhost:8082/api/v1/auth/register", form)
+        .then(res=>{
+          console.log(res.data)
+          return res.data
+        })
+        .then(data=>{
+          console.log(data)
+          const cookies = new Cookies()
+          cookies.set('token', data.token, {path: '/', secure: true})
+          console.log(cookies.get('token'))
+        })
+  }
   return (
     <div className='enter-wrap'>
       <div className="mainbody middle " id='middle'>
-          <form className="form-box front">
+          <form className="form-box front" onSubmit={e=>handleOnLoginSubmit(e)}>
             <div>
               <h2>Login</h2>
             </div>
             <div>
-              <input className="input-normal" type="text" placeholder="UserAccount" />
-              <input className="input-normal" type="password" placeholder="PassWord" />
+              <input className="input-normal" type="text" placeholder="UserAccount" required={true} onChange={e=>setLoginUserName(e.target.value)}/>
+              <input className="input-normal" type="password" placeholder="PassWord" required={true} onChange={e=>setLoginPassword(e.target.value)}/>
               <button className="btn-submit" type="submit">
                 LOGIN
               </button>
@@ -28,13 +82,13 @@ export const Gate = () => {
             </div>
           </form>
 
-          <form className="form-box back">
+          <form className="form-box back" onSubmit={e=>handleOnSignUpSubmit(e)}>
             <div>
               <h2>Register</h2>
             </div>
             <div>
-              <input className="input-normal" type="text" placeholder="UserAccount" />
-              <input className="input-normal" type="password" placeholder="PassWord" />
+              <input className="input-normal" type="text" placeholder="UserAccount" required={true} onChange={e=>setSignUpUserName(e.target.value)}/>
+              <input className="input-normal" type="password" placeholder="PassWord" required={true} onChange={e=>setSignUpPassword(e.target.value)}/>
               <button className="btn-submit" type="submit">
                 Register
               </button>

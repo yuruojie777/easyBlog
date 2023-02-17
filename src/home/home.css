@@ -3,7 +3,7 @@
     grid-template-columns: 1fr 1fr;
     gap: 10px;
     grid-template-rows: 1fr 1fr 4fr;
-    grid-template-areas: 
+    grid-template-areas:
     "weather calendar"
     "another calendar"
     "post post";
@@ -15,7 +15,7 @@
         gap: 10px;
         grid-template-columns: 1fr;
         grid-template-rows: 1fr 1fr 1fr 1fr;
-        grid-template-areas: 
+        grid-template-areas:
         "calendar"
         "weather"
         "another"
@@ -51,4 +51,9 @@
     background-color: rgb(127, 212, 255);
     border-radius: 10px;
     padding: 10px;
+}
+
+.carousel-box {
+    grid-area: carousel;
+    min-width: 370px;
 }
