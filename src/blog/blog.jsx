@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useContext} from 'react'
 import {Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
 import './blog.css'
 import { FloatButton } from 'antd';
-import { Col, Row } from 'antd';
+import { Pagination } from 'antd';
 import {article} from '../data';
+import {AuthContext} from "../context/authContext";
 export const Blog = () => {
     const style = {
         textAlign: 'left',
@@ -17,7 +18,7 @@ export const Blog = () => {
         navigate("/blog/new");
     }
 
-    
+    const {value} = useContext(AuthContext);
   return (
     <div className='blog-container'>
         <FloatButton onClick={createNewBlog} />
@@ -36,6 +37,12 @@ export const Blog = () => {
             <div style={style} id='content-box'>
                 <Outlet/>
             </div>
+            <div className="pagination">
+                <Pagination defaultCurrent={1} total={50} responsive={true} onChange={(current) => {
+                    navigate("/blog/"+current)
+                }}/>
+            </div>
+
             <div className='comment-box'></div>
         </div>
     </div> 

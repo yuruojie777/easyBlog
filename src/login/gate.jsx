@@ -1,14 +1,18 @@
-import React, {useState} from 'react'
+import React, {useContext, useState} from 'react'
 import './gate.css'
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import {AuthContext} from "../context/authContext";
+import {useNavigate} from "react-router-dom";
 
 export const Gate = () => {
 
+  const {value, setValue} = useContext(AuthContext);
   const [loginUserName, setLoginUserName] = useState();
   const [loginPassword, setLoginPassword] = useState();
   const [signUpUserName, setSignUpUserName] = useState();
   const [signUpPassword, setSignUpPassword] = useState();
+  const navigate = useNavigate();
 
 
   function handleFlip() {
@@ -23,7 +27,6 @@ export const Gate = () => {
       username: loginUserName,
       password: loginPassword
     }
-
     axios.post("http://localhost:8082/api/v1/auth/authenticate", form)
         .then(res=>{
           console.log(res.data)
@@ -34,6 +37,11 @@ export const Gate = () => {
           const cookies = new Cookies()
           cookies.set('token', data.token, {path: '/', secure: true, maxAge : 3600 * 24})
           console.log(cookies.get('token'))
+          if(data !== undefined) {
+            console.log("set user")
+            setValue("https://i.seadn.io/gcs/files/3e25bc3431e5fe30f7417953535fefe3.png?auto=format&w=512")
+            navigate("/")
+          }
         })
         .catch(err=>{
           console.log(err.toJSON())

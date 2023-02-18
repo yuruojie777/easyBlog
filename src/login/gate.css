@@ -6,7 +6,9 @@
   width: 100vw;
   height: 100vh;
 }
-
+.enter-wrap h2 {
+  color: white;
+}
 .enter-wrap footer {
   position: absolute;
   bottom: 1%;

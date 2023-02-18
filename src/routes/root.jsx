@@ -1,14 +1,33 @@
 import {Select} from 'antd';
 import { GithubOutlined, InstagramOutlined, LinkedinOutlined } from '@ant-design/icons';
+import { UserOutlined } from '@ant-design/icons';
+import { Avatar, Space } from 'antd';
 import { Outlet, NavLink, useNavigate, Link} from "react-router-dom";
 import './root.css';
+import {useContext, useEffect, useState} from "react";
+import {AuthContext} from "../context/authContext";
+import {DropDownPanel} from "../component/dropDownPanel";
 
 
 
 export default function Root() {
 
   const navigate = useNavigate();
-
+  const {value, setValue} = useContext(AuthContext);
+  const [visible, setVisible] = useState(false);
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (visible) {
+        setVisible(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("scroll", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("scroll", handleClickOutside);
+    };
+  }, [visible]);
   function handleOnClickHam (){
     const ham = document.getElementById("hamburger");
     const hidden_bars = document.getElementById("hidden-bars")
@@ -41,21 +60,14 @@ export default function Root() {
             </ul>
           </nav>
           <div className="fill-up"></div>
+
           <div className="button-box">
             <button className="login-btn" onClick={()=>navigate('/login')}>
               login
             </button>
-            <Select
-              defaultValue="white"
-              style={{ width: 130 }}
-              onChange={(value)=>{
-                  document.body.style.backgroundColor=`${value}`
-               }}
-              options={[
-                { value: 'black', label: 'DARK MODE' },
-                { value: 'white', label: 'LIGHT MODE' },
-              ]}
-            />
+            <div className="avatar-box" id="avatar-button" onClick={()=>{setVisible(!visible)}}>
+              <Avatar  icon={<UserOutlined />} style={{backgroundColor: '#f56a00'}} src={value}/>
+            </div>
           </div>
           <div className="ham-box">
             <button className="hamburger" id="hamburger" onClick={()=>handleOnClickHam()}>
@@ -79,6 +91,7 @@ export default function Root() {
         <div id="detail">
           <Outlet />
         </div>
+        {visible&& (<DropDownPanel/>)}
         <footer>
           <div>
             <GithubOutlined className="website-icon"/>

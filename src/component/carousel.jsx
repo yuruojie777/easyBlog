@@ -11,10 +11,10 @@ const contentStyle = {
 
 const MyCarousel = () => {
     const onChange = (currentSlide) => {
-        console.log(currentSlide);
+        // console.log(currentSlide);
     };
     return (
-        <Carousel afterChange={onChange}>
+        <Carousel afterChange={onChange} autoplay={true}>
             <div >
                 <h3 style={contentStyle}>1</h3>
             </div>

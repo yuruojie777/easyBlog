@@ -68,4 +68,12 @@
     .blog-container #title-box {
         display: none;
     }
+    .pagination {
+        display: block !important;
+    }
+}
+
+.pagination {
+    text-align: center;
+    display: none;
 }

@@ -2,6 +2,7 @@
 .container {
     margin: auto;
     width: 60vw;
+    position: relative;
 }
 
 @media screen and (max-width: 805px){
@@ -30,7 +31,7 @@
 }
 
 
-@media screen and (min-width: 620) {
+@media screen and (min-width: 620px) {
     .hidden-bars {
         display: none;
     }
@@ -46,8 +47,9 @@
     padding-left: 25px;
     padding-right: 25px;
     background-color: black;
-    margin-bottom: 10px;
-    border-radius: 10px;
+    margin-bottom: 5px;
+    border-radius: 10px 10px 0 0 ;
+
 }
 
 .nav-bar .fill-up {
@@ -104,6 +106,10 @@
     gap: 10px;
     align-items: center;
     justify-content: center;
+}
+
+.nav-bar .avatar-box {
+    cursor: pointer;
 }
 
 .nav-bar .hamburger {
@@ -217,4 +223,11 @@
 
 .container footer .website-icon:hover {
     color: black
+}
+@keyframes fadein {
+    from { opacity: 0}
+    to   { opacity: 1}
+}
+#id {
+    animation: fadein 2s;
 }

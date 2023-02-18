@@ -1,0 +1,27 @@
+.panel-container {
+    width: 150px;
+    background-color: #2b2b2b;
+    position: absolute;
+    top: 53px;
+    right: 0px;
+    text-align: center;
+    border-radius: 0 0 10px 10px;
+    z-index: 999;
+}
+
+.panel-container ul{
+    padding: 0;
+    list-style: none;
+    color: white;
+}
+
+.panel-container ul li {
+    margin-bottom: 10px;
+}
+
+@media screen and (max-width: 805px){
+    .panel-container {
+        left: 0;
+    }
+}
+
