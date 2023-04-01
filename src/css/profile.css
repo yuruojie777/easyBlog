@@ -30,9 +30,9 @@
 
 .background-container {
     height: 150px;
-    grid-area: "background";
+    grid-area: background;
     background: url('https://cdn.pixabay.com/photo/2016/11/01/18/38/background-1789175__480.png');
-    color: white;
+    /*color: white;*/
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -59,8 +59,12 @@
     border-color: aliceblue;
     border-width: 5px;
     border-style: solid;
-    background-color: white;
+    background-color: pink;
     background-position: center;
+}
+
+.about-container img {
+    border-radius: 50%;
 }
 
 .person-card-box {
@@ -91,4 +95,39 @@
 }
 .education-box img{
     border-radius: 2px;
+}
+
+.edit-modal {
+    color: black;
+}
+
+.edit-modal input {
+    width: 100%;
+    outline: none;
+    border: black 1px solid;
+    border-radius: 5px;
+}
+
+.edit-modal input:hover {
+    border: #1677ff 1px solid;
+}
+
+.edit-modal input:focus {
+    border: #1677ff 1px solid;
+}
+
+.edit-modal textarea {
+    height: 100px;
+    resize: none;
+    outline: none;
+    border: black 1px solid;
+    border-radius: 5px;
+}
+
+.edit-modal textarea:hover {
+    border: #1677ff 1px solid;
+}
+
+.edit-modal textarea:focus {
+    border: #1677ff 1px solid;
 }

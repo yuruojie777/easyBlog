@@ -1,5 +1,5 @@
 import React from 'react'
-import './new.css'
+import '../css/new.css'
 import {Carousel} from "antd";
 
 export const New = () => {

@@ -1,10 +1,9 @@
-import React, {useContext} from 'react'
-import {Link, NavLink, Outlet, useNavigate } from 'react-router-dom'
-import './blog.css'
+import React from 'react'
+import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import '../css/blog.css'
 import { FloatButton } from 'antd';
 import { Pagination } from 'antd';
-import {article} from '../data';
-import {AuthContext} from "../context/authContext";
+import {article} from '../data/data';
 export const Blog = () => {
     const style = {
         textAlign: 'left',
@@ -18,7 +17,6 @@ export const Blog = () => {
         navigate("/blog/new");
     }
 
-    const {value} = useContext(AuthContext);
   return (
     <div className='blog-container'>
         <FloatButton onClick={createNewBlog} />

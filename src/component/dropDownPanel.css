@@ -1,5 +1,5 @@
 .panel-container {
-    width: 150px;
+    width: 130px;
     background-color: #2b2b2b;
     position: absolute;
     top: 53px;
@@ -11,12 +11,24 @@
 
 .panel-container ul{
     padding: 0;
+    margin: 0;
     list-style: none;
     color: white;
 }
 
-.panel-container ul li {
-    margin-bottom: 10px;
+.panel-container ul li a{
+    display: flex;
+    gap: 10px;
+    padding: 0 10px;
+    text-decoration: none;
+    color: white;
+    height: 35px;
+    align-items: center;
+}
+
+.panel-container ul li a:hover{
+    background-color: #bdc4c9;
+    color: black;
 }
 
 @media screen and (max-width: 805px){

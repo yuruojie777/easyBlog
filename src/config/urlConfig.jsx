@@ -1,0 +1,1 @@
+export const URL_CONFIG = "http://localhost:8080/api/v1"

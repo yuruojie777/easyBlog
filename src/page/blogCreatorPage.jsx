@@ -1,6 +1,6 @@
 import React from 'react'
-import './blogCreatorPage.css'
-import { Button, message, Space } from 'antd';
+import '../css/blogCreatorPage.css'
+import { message } from 'antd';
 import { Form } from 'react-router-dom';
 import { useState } from 'react';
 export const BlogCreatorPage = () => {
@@ -58,7 +58,6 @@ export const BlogCreatorPage = () => {
                 <button type='button' style={{backgroundColor:'green'}}>Save as draft</button>
             </div>
         </Form>
-        <div className='g-progress'></div>
     </div>
   )
 }

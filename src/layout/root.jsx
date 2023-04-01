@@ -1,33 +1,31 @@
-import {Select} from 'antd';
 import { GithubOutlined, InstagramOutlined, LinkedinOutlined } from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
-import { Avatar, Space } from 'antd';
+import { Avatar } from 'antd';
 import { Outlet, NavLink, useNavigate, Link} from "react-router-dom";
-import './root.css';
+import '../css/root.css';
 import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/authContext";
-import {DropDownPanel} from "../component/dropDownPanel";
-
+import {DropDownPanel} from "../component/dropdown/dropDownPanel";
+import {get} from "../service/ApiService";
 
 
 export default function Root() {
 
   const navigate = useNavigate();
-  const {value, setValue} = useContext(AuthContext);
+  const {user, setUser} = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (visible) {
-        setVisible(false);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    document.addEventListener("scroll", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.removeEventListener("scroll", handleClickOutside);
-    };
-  }, [visible]);
+
+  useEffect(()=>{
+    console.log("send request")
+    get("/auth/users").then(
+        res => {
+            console.log(res)
+            setUser(res.data);
+        }
+    ).catch()
+  }, [])
+
+
   function handleOnClickHam (){
     const ham = document.getElementById("hamburger");
     const hidden_bars = document.getElementById("hidden-bars")
@@ -62,11 +60,22 @@ export default function Root() {
           <div className="fill-up"></div>
 
           <div className="button-box">
-            <button className="login-btn" onClick={()=>navigate('/login')}>
-              login
-            </button>
+            {
+              user===undefined?
+                  <button className="login-btn" onClick={()=>navigate('/login')}>
+                    login
+                  </button>:
+                  <p>{user.name}</p>
+            }
             <div className="avatar-box" id="avatar-button" onClick={()=>{setVisible(!visible)}}>
-              <Avatar  icon={<UserOutlined />} style={{backgroundColor: '#f56a00'}} src={value}/>
+              {user===undefined?(
+                  <Avatar  icon={<UserOutlined />} style={{backgroundColor: '#f56a00', backgroundSize: 'contain'}}/>
+              ):(
+                  <Avatar icon={<UserOutlined />} style={{backgroundColor: '#f56a00', backgroundSize: 'contain'}}
+                          src={user.avatar===undefined||user.avatar===null?
+                              "https://api.dicebear.com/5.x/initials/svg?seed="+user.name+"&backgroundType=gradientLinear":
+                               "data:image/png;base64,"+ user.avatar}/>
+              )}
             </div>
           </div>
           <div className="ham-box">
