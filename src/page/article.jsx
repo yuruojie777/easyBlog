@@ -1,18 +1,18 @@
 import React, { useState } from 'react'
 import { Rate } from 'antd';
-import { useLoaderData } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import MyTag from '../component/tag/tag';
 import { article } from '../data/data';
 import { Select } from 'antd';
 import '../css/article.css'
 import {FONT_LIST} from "../config/fontConfig";
 
-export function loader({params}) {
-    return article()[params.blogId-1]
-}
 
 export const Article = () => {
-    const article_list = useLoaderData();
+
+    let { blogId } = useParams();
+    console.log(blogId)
+    const current_article = article()[blogId-1];
     const [fontStyle, setFontStyle] = useState("'Shantell Sans', cursive");
     const handleChange = (value) => {
       setFontStyle(value)
@@ -21,7 +21,7 @@ export const Article = () => {
     <div>
         <div id='article-title-tags'>
           <div>
-            <MyTag title={article_list.title} tags={article_list.tags}/>
+            <MyTag title={current_article.title} tags={current_article.tags}/>
           </div>
           <div>
             <Select defaultValue="'Shantell Sans', cursive"
@@ -31,7 +31,7 @@ export const Article = () => {
             />
           </div>
         </div>
-        <div style={{fontFamily: fontStyle}}>{article_list.content}</div>
+        <div style={{fontFamily: fontStyle}}>{current_article.content}</div>
         <div style={{
           fontSize:'12px',
           fontWeight:'bold',

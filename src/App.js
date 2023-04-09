@@ -11,7 +11,7 @@ import { Blog } from "./page/blog";
 import { Profile } from "./page/profile";
 import { New } from "./page/new";
 import { BlogCreatorPage } from "./page/blogCreatorPage";
-import { Article, loader as articleLoader } from "./page/article";
+import { Article } from "./page/article";
 import { Home } from "./page/home";
 import { Gate } from "./page/gate";
 import {AuthContext} from "./context/authContext";
@@ -37,7 +37,6 @@ function App() {
             {
               path: ':blogId',
               element: <Article/>,
-              loader: articleLoader
             }
           ]
         },

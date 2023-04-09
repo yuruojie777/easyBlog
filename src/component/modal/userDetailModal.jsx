@@ -5,9 +5,8 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 
 
-export const UserDetailModal = ({open}) => {
+export const UserDetailModal = (open, onCancel) => {
     const dateFormat = 'YYYY/MM/DD';
-    const [isModalOpen, setIsModalOpen] = useState(false);
     const userDetail = useRef(
         {
             name: "Roger",
@@ -23,14 +22,6 @@ export const UserDetailModal = ({open}) => {
             intro: "Hello everyone, my name is Roger! Nice to meet you"
         }
     );
-
-    const handleOk = () => {
-        setIsModalOpen(false);
-        
-    };
-    const handleCancel = () => {
-        setIsModalOpen(false);
-    };
     const onFinish = (values) => {
         console.log(values);
     };
@@ -55,12 +46,12 @@ export const UserDetailModal = ({open}) => {
     return (
         <div>
             <Modal title="Edit profile"
-                   open={open}
-                   onOk={handleOk}
                    okText="Save"
+                   open={open}
+                   onCancel={onCancel}
                    okButtonProps={{size:'middle', shape:'round'}}
                    cancelButtonProps={{size:'middle', shape:'round'}}
-                   onCancel={handleCancel}>
+            >
                 <Divider/>
                 <Form
                     {...layout}
