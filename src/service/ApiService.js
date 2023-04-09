@@ -28,6 +28,7 @@ export const auth = (form) => {
             if(res.status === 200) {
                 const cookie = new Cookies();
                 cookie.set("token", res.data.token, {path: '/', secure: true, maxAge : 3600 * 24})
+                cookie.set("uid", res.data.uid, {path: '/', secure: true, maxAge : 3600 * 24})
                 window.location = ("/");
             }
         }

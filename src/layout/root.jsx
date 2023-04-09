@@ -7,6 +7,7 @@ import {useContext, useEffect, useState} from "react";
 import {AuthContext} from "../context/authContext";
 import {DropDownPanel} from "../component/dropdown/dropDownPanel";
 import {get} from "../service/ApiService";
+import Cookies from "universal-cookie/es6";
 
 
 export default function Root() {
@@ -15,16 +16,17 @@ export default function Root() {
   const {user, setUser} = useContext(AuthContext);
   const [visible, setVisible] = useState(false);
 
+  // Fetch user info
   useEffect(()=>{
-    console.log("send request")
-    get("/auth/users").then(
-        res => {
-            console.log(res)
+    // if(user.name !== undefined) {
+      get("/customer/users?uid=" + new Cookies().get("uid")).then(
+          (res) => {
+            console.log(res.data)
             setUser(res.data);
-        }
-    ).catch()
+          }
+      ).catch()
+    // }
   }, [])
-
 
   function handleOnClickHam (){
     const ham = document.getElementById("hamburger");
@@ -61,14 +63,14 @@ export default function Root() {
 
           <div className="button-box">
             {
-              user===undefined?
+              user.name===undefined?
                   <button className="login-btn" onClick={()=>navigate('/login')}>
                     login
                   </button>:
                   <p>{user.name}</p>
             }
             <div className="avatar-box" id="avatar-button" onClick={()=>{setVisible(!visible)}}>
-              {user===undefined?(
+              {user.name===undefined?(
                   <Avatar  icon={<UserOutlined />} style={{backgroundColor: '#f56a00', backgroundSize: 'contain'}}/>
               ):(
                   <Avatar icon={<UserOutlined />} style={{backgroundColor: '#f56a00', backgroundSize: 'contain'}}

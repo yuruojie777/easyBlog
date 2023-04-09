@@ -1,5 +1,5 @@
 import React from 'react'
-import { NavLink, Outlet, useNavigate } from 'react-router-dom'
+import { NavLink, Outlet } from 'react-router-dom'
 import '../css/blog.css'
 import { FloatButton } from 'antd';
 import { Pagination } from 'antd';
@@ -12,14 +12,9 @@ export const Blog = () => {
         padding: '20px',
         fontSize: '1em'
       };
-    const navigate = useNavigate();
-    const createNewBlog = ()=>{
-        navigate("/blog/new");
-    }
-
   return (
     <div className='blog-container'>
-        <FloatButton onClick={createNewBlog} />
+        <FloatButton onClick={()=>window.location="/blog/new"} />
         <div className='blog-box'>
             <div id='title-box' style={style}>
                 <h3 style={{textAlign:'center'}}>Content</h3>
@@ -37,7 +32,7 @@ export const Blog = () => {
             </div>
             <div className="pagination">
                 <Pagination defaultCurrent={1} total={50} responsive={true} onChange={(current) => {
-                    navigate("/blog/"+current)
+                    window.location("/blog/"+current)
                 }}/>
             </div>
 

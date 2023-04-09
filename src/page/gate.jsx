@@ -16,7 +16,8 @@ export const Gate = () => {
   const signUpForm = useRef(
       {
         username: "",
-        password: ""
+        password: "",
+        name: ""
       }
   )
 
@@ -77,6 +78,11 @@ export const Gate = () => {
                      placeholder="PassWord"
                      required={true}
                      onChange={e=>signUpForm.current.password = e.target.value}/>
+              <input className="input-normal"
+                     type="text"
+                     placeholder="Name"
+                     required={true}
+                     onChange={e=>signUpForm.current.name = e.target.value}/>
               <button className="btn-submit" type="submit">
                 Register
               </button>
