@@ -26,8 +26,10 @@ export const New = () => {
                     allowFullScreen></iframe>
         </div>
         <div className="ratio ratio-16x9">
-            <iframe src="//player.bilibili.com/player.html?aid=928861104&bvid=BV1uT4y1P7CX&cid=287639008&page=1"
-                    scrolling="no" border="0" frameBorder="no" framespacing="0" allowFullScreen="true"></iframe>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/yN7ypxC7838"
+                    title="YouTube video player" frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen></iframe>
         </div>
     </div>
   )
