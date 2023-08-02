@@ -32,7 +32,7 @@ export const Blog = () => {
             </div>
             <div className="pagination">
                 <Pagination defaultCurrent={1} total={50} responsive={true} onChange={(current) => {
-                    window.location("/blog/"+current)
+                    window.location.assign("/blog/"+current)
                 }}/>
             </div>
 

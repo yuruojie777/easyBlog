@@ -57,6 +57,9 @@ export default function Root() {
               <li>
                 <NavLink to="/new" id="new">New</NavLink>
               </li>
+              <li>
+                <NavLink to="/tools" id="tools">Tools</NavLink>
+              </li>
             </ul>
           </nav>
           <div className="fill-up"></div>

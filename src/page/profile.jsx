@@ -49,7 +49,7 @@ export const Profile = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOk = () => {
         setIsModalOpen(false);
-        console.log("finsished")
+        console.log("finished")
     };
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -69,18 +69,19 @@ export const Profile = () => {
     <div className='profile-container'>
       <div className='background-container info-box'>
         <div className='person-card-box'>
-          <div className='avatar-container'>
-              {(
-                  <img width="100%" src={user.avatar === null || user.avatar === undefined? "https://api.dicebear.com/5.x/initials/svg?seed="+user.name+"&backgroundType=gradientLinear":
-                      "data:image/png;base64,"+user.avatar} style={{borderRadius: '50%'}}/>
-              )}
+          <div className='avatar-container' style={{backgroundImage: '/resource/me.jpg'}}>
+              {/*<img width="100%" src='/resource/me.jpg' style={{borderRadius: '50%'}}/>*/}
+              {/*{(*/}
+              {/*    <img width="100%" src={user.avatar === null || user.avatar === undefined? "https://api.dicebear.com/5.x/initials/svg?seed="+user.name+"&backgroundType=gradientLinear":*/}
+              {/*        "data:image/png;base64,"+user.avatar} style={{borderRadius: '50%'}}/>*/}
+              {/*)}*/}
           </div>
           <span className="name-box">
             <p>{user.name === undefined? "Not login yet": user.name}</p>
             <div className='education-box'>
               <img  width="24px" height="24px"
                     alt="me"
-                    src='https://media.licdn.com/dms/image/C560BAQHbPUZaDAMT6g/company-logo_100_100/0/1646696237089?e=1683158400&v=beta&t=1tH1oIZG4PMUc7LO_dw6q_TXoTJ8FVfTPsCa37sKcD4'/>
+                    src='/resource/image.png'/>
               <p>University of Sydney</p>            
             </div>
           </span>

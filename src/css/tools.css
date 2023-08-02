@@ -1,0 +1,9 @@
+.tools-container {
+    background: aquamarine;
+    height: 85vh;
+    border-radius: 10px;
+}
+
+.tools-container .menu-link {
+    color: #2b2b2b;
+}

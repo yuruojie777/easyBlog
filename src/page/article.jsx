@@ -38,7 +38,7 @@ export const Article = () => {
           borderRadius:'5px',
           marginTop: '20px',
           padding:'2px'}}>
-            <span>How do you like this blog?</span>
+            <span>How do you like this blog?&nbsp;</span>
             <Rate allowHalf defaultValue={2.5} />
         </div>
     </div>

@@ -15,6 +15,8 @@ import { Article } from "./page/article";
 import { Home } from "./page/home";
 import { Gate } from "./page/gate";
 import {AuthContext} from "./context/authContext";
+import {Tools} from "./page/tools";
+import {Base64Decode} from "./page/base64Decode";
 
 
 function App() {
@@ -51,6 +53,16 @@ function App() {
         {
           path: "new",
           element: <New/>
+        },
+        {
+          path: "tools",
+          element: <Tools/>,
+          children: [
+            {
+              path: 'base64-decode',
+              element: <Base64Decode/>,
+            }
+          ]
         }
       ],
     },
