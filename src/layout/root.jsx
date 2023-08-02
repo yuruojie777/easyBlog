@@ -99,6 +99,7 @@ export default function Root() {
             <Link to="/blog/1">BLOG</Link>
             <Link to="/profile">PROFILE</Link>
             <Link to="/new">NEW</Link>
+            <Link to="/tools">TOOLS</Link>
           </div>
         </div>
 
