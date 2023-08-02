@@ -46,12 +46,12 @@ export const Gate = () => {
             <div>
               <input className="input-normal"
                      type="text"
-                     placeholder="UserAccount"
+                     placeholder="User account"
                      required={true}
                      onChange={e=>loginForm.current.username = e.target.value}/>
               <input className="input-normal"
                      type="password"
-                     placeholder="PassWord"
+                     placeholder="Password"
                      required={true}
                      onChange={e=>loginForm.current.password = e.target.value}/>
               <button className="btn-submit" type="submit">
@@ -70,12 +70,12 @@ export const Gate = () => {
             <div>
               <input className="input-normal"
                      type="text"
-                     placeholder="UserAccount"
+                     placeholder="User account"
                      required={true}
                      onChange={e=>signUpForm.current.username = e.target.value}/>
               <input className="input-normal"
                      type="password"
-                     placeholder="PassWord"
+                     placeholder="Password"
                      required={true}
                      onChange={e=>signUpForm.current.password = e.target.value}/>
               <input className="input-normal"
@@ -88,15 +88,15 @@ export const Gate = () => {
               </button>
             </div>
             <div>
-              <p style={{marginTop: "40px"}}>Have an account ? You can</p>
-              <p>Click here to
+              <p style={{marginTop: "40px"}}>Have an account? You can</p>
+              <p>Click here to&nbsp;
                 <a id="login" onClick={handleFlip}>Log in</a>
               </p>
             </div>
           </form>
         </div>
-        <footer>Photo by
-          <a href="https://unsplash.com/@greg_rosenke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Greg Rosenke</a> on
+        <footer>Photo by&nbsp;
+          <a href="https://unsplash.com/@greg_rosenke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Greg Rosenke</a> on&nbsp;
           <a href="https://unsplash.com/s/photos/lighting?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
         </footer>
     </div>

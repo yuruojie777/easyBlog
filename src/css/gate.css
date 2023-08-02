@@ -60,10 +60,12 @@
   border-radius: 10px;
   border-width: 0;
   display: block;
-  background: darkslategrey;
+  background: #2c4848;
   transition: 0.3s;
 }
- 
+.btn-submit:hover {
+  background: #3F6969FF;
+}
 .front {
   transform: rotateY(0deg);
 }
@@ -100,4 +102,8 @@ p {
 a {
   color: aqua;
   cursor: pointer;
+}
+
+footer a {
+  text-decoration:none
 }

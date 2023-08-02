@@ -45,18 +45,16 @@ export const BlogCreatorPage = () => {
     <div>
         <Form onSubmit={e=>onHandleSubmit(e)}>
             <div className='title-box'>
-                <span>Title</span>
-                <input placeholder='Input title of your blog' required={true} onChange={(e)=>{setTitle(e.target.value)}} disabled={inputDisabled}/>
+                <input placeholder='Input Title of your Blog' required={true} onChange={(e)=>{setTitle(e.target.value)}} disabled={inputDisabled}/>
             </div>
             <div className='content-box'>
-                <span>Content</span>
-                <textarea placeholder='Write your content here' required={true} onChange={(e)=>{setContent(e.target.value)}} disabled={textDisabled}/>
+                <textarea placeholder='Write your Content here' required={true} onChange={(e)=>{setContent(e.target.value)}} disabled={textDisabled}/>
+                <div className='btn-group'>
+                    <button type='submit'>Create now</button>
+                    <button type='button' style={{backgroundColor:'green'}}>Save as draft</button>
+                </div>
             </div>
             {contextHolder}
-            <div className='btn-group'>
-                <button type='submit'>Create now</button>
-                <button type='button' style={{backgroundColor:'green'}}>Save as draft</button>
-            </div>
         </Form>
     </div>
   )
