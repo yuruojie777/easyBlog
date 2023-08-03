@@ -1,9 +1,19 @@
 .tools-container {
-    background: aquamarine;
+    background: #c6e7f5;
     height: 85vh;
     border-radius: 10px;
 }
-
 .tools-container .menu-link {
+    margin-left: 10px;
+    margin-right: 10px;
     color: #2b2b2b;
+}
+
+.tools-container .active {
+    /*color: red!important;*/
+    font-weight: bolder;
+}
+
+.menu-link:hover {
+    font-weight: bolder;
 }

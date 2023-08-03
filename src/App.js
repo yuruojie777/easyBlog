@@ -17,6 +17,8 @@ import { Gate } from "./page/gate";
 import {AuthContext} from "./context/authContext";
 import {Tools} from "./page/tools";
 import {Base64Decode} from "./page/base64Decode";
+import {JsonPrettify} from "./page/jsonPrettify";
+import {RandomGenerator} from "./page/randomGenerator";
 
 
 function App() {
@@ -61,6 +63,14 @@ function App() {
             {
               path: 'base64-decode',
               element: <Base64Decode/>,
+            },
+            {
+              path: 'json-prettify',
+              element: <JsonPrettify/>,
+            },
+            {
+              path: 'random-generator',
+              element: <RandomGenerator/>,
             }
           ]
         }

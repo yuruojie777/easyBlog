@@ -81,10 +81,7 @@
 
 .nav-bar ul a {
     text-decoration: none;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding: 3px 10px;
     color: white;
     border-radius: 10px;
 }
@@ -97,7 +94,6 @@
 .nav-bar ul .active {
     color: black;
     background-color: white !important;
-    
 }
 
 .nav-bar .button-box {
