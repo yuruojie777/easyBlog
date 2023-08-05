@@ -15,9 +15,10 @@ export const JsonPrettify = () => {
     }
     return (
         <div>
-            <textarea onChange={(e) => convert(e.target.value)}></textarea>
+            <h3>Json prettify</h3>
+            <textarea placeholder="JSON to prettify" onChange={(e) => convert(e.target.value)}></textarea>
             {/*<button onClick={convert}>convert</button>*/}
-            <textarea value={result} readOnly={true}></textarea>
+            <textarea placeholder="Result..." value={result} readOnly={true}></textarea>
             <div style={{fontWeight: "bolder", color: valid?'green':'red'}}>{valid?'Valid':'Invalid'}</div>
         </div>
     )
