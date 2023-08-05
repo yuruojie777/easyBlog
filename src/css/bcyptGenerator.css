@@ -1,0 +1,66 @@
+.bcrypt-container .encrypt-box{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+}
+
+.bcrypt-container .decrypt-box{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    gap: 10px;
+}
+
+.count-box {
+    background: #61dafb;
+    margin-right: 10px;
+    margin-left: 10px;
+    display: inline-block;
+    align-items: center;
+}
+
+.count-box span{
+    margin: 0;
+}
+.encrypt-input-box {
+    background: aquamarine;
+    display: inline-block;
+    width: 80%;
+}
+
+.decrypt-input-box {
+    background: aquamarine;
+    display: inline-block;
+    width: 80%;
+}
+
+.encrypt-input-box input {
+    width: 50%;
+}
+
+.decrypt-input-box input {
+    width: 95%;
+}
+.encrypt-result-box {
+    background: aquamarine;
+    display: inline-block;
+    width: 80%;
+}
+.encrypt-result-box input {
+    width: 80%;
+    border: none;
+    background: transparent;
+    outline: none;
+}
+
+#copy-icon {
+    cursor: pointer;
+}
+
+#copy-icon:hover {
+    cursor: pointer;
+    color: gray;
+}

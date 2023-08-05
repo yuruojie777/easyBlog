@@ -19,6 +19,8 @@ import {Tools} from "./page/tools";
 import {Base64Decode} from "./page/base64Decode";
 import {JsonPrettify} from "./page/jsonPrettify";
 import {RandomGenerator} from "./page/randomGenerator";
+import {BcryptGenerator} from "./page/bcryptGenerator";
+import {Camera} from "./page/camera";
 
 
 function App() {
@@ -71,6 +73,14 @@ function App() {
             {
               path: 'random-generator',
               element: <RandomGenerator/>,
+            },
+            {
+              path: 'bcrypt-password',
+              element: <BcryptGenerator/>,
+            },
+            {
+              path: 'my-camera',
+              element: <Camera/>,
             }
           ]
         }
