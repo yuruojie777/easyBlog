@@ -21,6 +21,7 @@ import {JsonPrettify} from "./page/jsonPrettify";
 import {RandomGenerator} from "./page/randomGenerator";
 import {BcryptGenerator} from "./page/bcryptGenerator";
 import {Camera} from "./page/camera";
+import {MdEditor, MyEditor} from "./page/mdEditor";
 
 
 function App() {
@@ -48,7 +49,7 @@ function App() {
         },
         {
           path: "blog/new",
-          element: <BlogCreatorPage/>,
+          element: <MyEditor/>,
         },
         {
           path: "profile",
@@ -83,7 +84,11 @@ function App() {
               element: <Camera/>,
             }
           ]
-        }
+        },
+        {
+          path: "md",
+          element: <MyEditor/>
+        },
       ],
     },
     {

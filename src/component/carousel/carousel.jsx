@@ -15,16 +15,16 @@ const MyCarousel = () => {
     return (
         <Carousel afterChange={onChange} autoplay={true}>
             <div>
-                <h3 style={contentStyle}>小饼干</h3>
+                <h3 style={contentStyle}>Created</h3>
             </div>
             <div>
-                <h3 style={contentStyle}>我</h3>
+                <h3 style={contentStyle}>By</h3>
             </div>
             <div>
-                <h3 style={contentStyle}>爱</h3>
+                <h3 style={contentStyle}>Roger</h3>
             </div>
             <div>
-                <h3 style={contentStyle}>你</h3>
+                <h3 style={contentStyle}>Yu</h3>
             </div>
         </Carousel>
     );

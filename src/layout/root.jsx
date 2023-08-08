@@ -55,10 +55,10 @@ export default function Root() {
                 <NavLink to="/profile" id="profile">Profile</NavLink>
               </li>
               <li>
-                <NavLink to="/new" id="new">New</NavLink>
+                <NavLink to="/new" id="new">Video</NavLink>
               </li>
               <li>
-                <NavLink to="/tools" id="tools">Tools</NavLink>
+                <NavLink to="/tools/base64-decode" id="tools">Tools</NavLink>
               </li>
             </ul>
           </nav>
@@ -73,14 +73,9 @@ export default function Root() {
                   <p>{user.name}</p>
             }
             <div className="avatar-box" id="avatar-button" onClick={()=>{setVisible(!visible)}}>
-              {user.name===undefined?(
-                  <Avatar  icon={<UserOutlined />} style={{backgroundColor: '#f56a00', backgroundSize: 'contain'}}/>
-              ):(
-                  <Avatar icon={<UserOutlined />} style={{backgroundColor: '#f56a00', backgroundSize: 'contain'}}
-                          src={user.avatar===undefined||user.avatar===null?
-                              "https://api.dicebear.com/5.x/initials/svg?seed="+user.name+"&backgroundType=gradientLinear":
-                               "data:image/png;base64,"+ user.avatar}/>
-              )}
+              <Avatar  icon={<UserOutlined />}
+                       src="/resource/me.jpg"
+                       style={{backgroundColor: 'black', backgroundSize: 'contain'}}/>
             </div>
           </div>
           <div className="ham-box">
@@ -98,8 +93,8 @@ export default function Root() {
             <Link to="/">HOME</Link>
             <Link to="/blog/1">BLOG</Link>
             <Link to="/profile">PROFILE</Link>
-            <Link to="/new">NEW</Link>
-            <Link to="/tools">TOOLS</Link>
+            <Link to="/new">VIDEO</Link>
+            <Link to="/tools/base64-decode">TOOLS</Link>
           </div>
         </div>
 

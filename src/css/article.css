@@ -1,3 +1,6 @@
+.article-container .wmde-markdown {
+    background-color: transparent;
+}
 #article-title-tags {
     display: flex;
     flex-direction: row;
