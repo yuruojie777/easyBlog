@@ -58,7 +58,10 @@ export default function Root() {
                 <NavLink to="/new" id="new">Video</NavLink>
               </li>
               <li>
-                <NavLink to="/tools/base64-decode" id="tools">Tools</NavLink>
+                <NavLink to="/tools" id="tools">Tools</NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin" id="admin">Admin</NavLink>
               </li>
             </ul>
           </nav>
@@ -94,7 +97,7 @@ export default function Root() {
             <Link to="/blog/1">BLOG</Link>
             <Link to="/profile">PROFILE</Link>
             <Link to="/new">VIDEO</Link>
-            <Link to="/tools/base64-decode">TOOLS</Link>
+            <Link to="/tools">TOOLS</Link>
           </div>
         </div>
 

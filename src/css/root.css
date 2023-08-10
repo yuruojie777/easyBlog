@@ -5,7 +5,7 @@
     position: relative;
 }
 
-@media screen and (max-width: 805px){
+@media screen and (max-width: 917px){
     .container {
         width: 100%;
     }
@@ -14,7 +14,7 @@
     }
 
     .nav-bar {
-        height: 53.33px
+        height: 53px
     }
 
     .fill-up {
@@ -33,6 +33,9 @@
 
 @media screen and (min-width: 620px) {
     .hidden-bars {
+        display: none;
+    }
+    .nav-bar {
         display: none;
     }
 }
@@ -167,7 +170,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
     border-radius: 10px;
-    height: 100px;
+    height: 130px;
     z-index: 99;
 
 
@@ -181,6 +184,7 @@
     text-decoration: none;
     color: whitesmoke;
     font-weight: 300;
+    margin-bottom: 5px;;
 }
 
 

@@ -22,6 +22,7 @@ import {RandomGenerator} from "./page/randomGenerator";
 import {BcryptGenerator} from "./page/bcryptGenerator";
 import {Camera} from "./page/camera";
 import {MdEditor, MyEditor} from "./page/mdEditor";
+import {Admin} from "./page/admin";
 
 
 function App() {
@@ -62,32 +63,14 @@ function App() {
         {
           path: "tools",
           element: <Tools/>,
-          children: [
-            {
-              path: 'base64-decode',
-              element: <Base64Decode/>,
-            },
-            {
-              path: 'json-prettify',
-              element: <JsonPrettify/>,
-            },
-            {
-              path: 'random-generator',
-              element: <RandomGenerator/>,
-            },
-            {
-              path: 'bcrypt-password',
-              element: <BcryptGenerator/>,
-            },
-            {
-              path: 'my-camera',
-              element: <Camera/>,
-            }
-          ]
         },
         {
           path: "md",
           element: <MyEditor/>
+        },
+        {
+          path: "admin",
+          element: <Admin/>,
         },
       ],
     },

@@ -89,9 +89,9 @@
 .middle-flip .back {
   transform: rotateY(0deg);
 }
- 
 
-p {
+
+.enter-wrap p {
   margin: 15px auto;
   padding: 0;
   font-size: 16px;
@@ -99,7 +99,7 @@ p {
   display: block;
   text-align: center;
 }
-a {
+.enter-wrap a {
   color: aqua;
   cursor: pointer;
 }

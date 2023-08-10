@@ -1,14 +1,47 @@
 import '../css/tools.css';
-import {NavLink, Outlet} from "react-router-dom";
+import {Tabs} from "antd";
+import {useState} from "react";
+import {Base64Decode} from "./base64Decode";
+import {JsonPrettify} from "./jsonPrettify";
+import {RandomGenerator} from "./randomGenerator";
+import {BcryptGenerator} from "./bcryptGenerator";
 export const Tools = () => {
+    const [mode, setMode] = useState('top');
+    const handleModeChange = (e) => {
+        setMode(e.target.value);
+    };
+    const items = [
+        {
+            label: `Base64Decode`,
+            key: 1,
+            children: <Base64Decode/>,
+        },
+        {
+            label: `JsonPrettify`,
+            key: 2,
+            children: <JsonPrettify/>,
+        },
+        {
+            label: `RandomGenerator`,
+            key: 3,
+            children: <RandomGenerator/>,
+        },
+        {
+            label: `Bcrypt`,
+            key: 4,
+            children: <BcryptGenerator/>,
+        }
+    ];
     return (
         <div className="tools-container">
-            <NavLink to="base64-decode" className="menu-link">Base64</NavLink>
-            <NavLink to="json-prettify" className="menu-link">Json Prettify</NavLink>
-            <NavLink to="random-generator" className="menu-link">Random Generator</NavLink>
-            <NavLink to="bcrypt-password" className="menu-link">Bcrypt Password</NavLink>
-            <NavLink to="my-camera" className="menu-link">Camera</NavLink>
-            <Outlet />
+            <Tabs
+                defaultActiveKey="1"
+                tabPosition={mode}
+                style={{
+                    height: 220,
+                }}
+                items={items}
+            />
         </div>
     )
 }
