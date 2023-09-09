@@ -5,6 +5,7 @@ import {Base64Decode} from "./base64Decode";
 import {JsonPrettify} from "./jsonPrettify";
 import {RandomGenerator} from "./randomGenerator";
 import {BcryptGenerator} from "./bcryptGenerator";
+import {WordSearch} from "./wordSearch";
 export const Tools = () => {
     const [mode, setMode] = useState('top');
     const handleModeChange = (e) => {
@@ -12,9 +13,9 @@ export const Tools = () => {
     };
     const items = [
         {
-            label: `Base64Decode`,
+            label: `Word`,
             key: 1,
-            children: <Base64Decode/>,
+            children: <WordSearch/>,
         },
         {
             label: `JsonPrettify`,
@@ -30,7 +31,12 @@ export const Tools = () => {
             label: `Bcrypt`,
             key: 4,
             children: <BcryptGenerator/>,
-        }
+        },
+        {
+            label: `Base64Decode`,
+            key: 5,
+            children: <Base64Decode/>,
+        },
     ];
     return (
         <div className="tools-container">

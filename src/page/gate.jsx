@@ -1,21 +1,25 @@
-import React, { useContext, useRef } from 'react'
+import React, {useContext, useRef, useState} from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from "../redux/actions";
 import '../css/gate.css'
-import {AuthContext} from "../context/authContext";
+import {useAuth} from "../context/authContext";
 import {auth, register} from "../service/ApiService";
+import {message} from "antd";
 export const Gate = () => {
 
-  const {value, setValue} = useContext(AuthContext);
-
+  const {login, user} = useAuth();
+  const [loading, setLoading] = useState(false);
+  // const dispatch = useDispatch();
   const loginForm = useRef(
       {
-        username: "",
+        email: "",
         password: ""
       }
   )
 
   const signUpForm = useRef(
       {
-        username: "",
+        email: "",
         password: "",
         name: ""
       }
@@ -29,7 +33,24 @@ export const Gate = () => {
 
   function handleOnLoginSubmit(e) {
     e.preventDefault();
-    auth(loginForm.current);
+    setLoading(true);
+    // login(loginForm.current);
+    // dispatch(login(user))
+    auth(loginForm.current).then(
+        res => {
+          if(res.status === 200) {
+            // setUser(res.data.email)
+            // console.log(res.data);
+            message.success("Successfully login", 0.5).then(() => {
+              window.location.assign("/");
+            })
+          }
+        }
+    ).catch(e => {
+      message.error("Failed to login");
+    }).finally(() => {
+      setLoading(false);
+    })
   }
 
   function handleOnSignUpSubmit(e) {
@@ -48,14 +69,14 @@ export const Gate = () => {
                      type="text"
                      placeholder="User account"
                      required={true}
-                     onChange={e=>loginForm.current.username = e.target.value}/>
+                     onChange={e=>loginForm.current.email = e.target.value}/>
               <input className="input-normal"
                      type="password"
                      placeholder="Password"
                      required={true}
                      onChange={e=>loginForm.current.password = e.target.value}/>
               <button className="btn-submit" type="submit">
-                Login
+                {loading?'Login...':'Login'}
               </button>
             </div>
             <div>
@@ -72,7 +93,7 @@ export const Gate = () => {
                      type="text"
                      placeholder="User account"
                      required={true}
-                     onChange={e=>signUpForm.current.username = e.target.value}/>
+                     onChange={e=>signUpForm.current.email = e.target.value}/>
               <input className="input-normal"
                      type="password"
                      placeholder="Password"
@@ -97,7 +118,8 @@ export const Gate = () => {
         </div>
         <footer>Photo by&nbsp;
           <a href="https://unsplash.com/@greg_rosenke?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Greg Rosenke</a> on&nbsp;
-          <a href="https://unsplash.com/s/photos/lighting?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
+          <a href="https://unsplash.com/s/photos/lighting?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a> and&nbsp;
+          <a href="https://freefrontend.com/css-animated-backgrounds/">Diyorbek Olimov</a>
         </footer>
     </div>
   )

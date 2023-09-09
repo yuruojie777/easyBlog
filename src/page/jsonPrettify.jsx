@@ -1,5 +1,5 @@
 import {useState} from "react";
-
+import "../css/jsonPrettify.css";
 export const JsonPrettify = () => {
     const [rawJson, setRawJson] = useState('');
     const [result, setResult] = useState('');
@@ -16,9 +16,9 @@ export const JsonPrettify = () => {
     return (
         <div>
             <h3>Json prettify</h3>
-            <textarea placeholder="JSON to prettify" onChange={(e) => convert(e.target.value)}></textarea>
+            <textarea className="json-raw-box" placeholder="JSON to prettify" onChange={(e) => convert(e.target.value)}></textarea>
             {/*<button onClick={convert}>convert</button>*/}
-            <textarea placeholder="Result..." value={result} readOnly={true}></textarea>
+            <textarea className="json-result-box" placeholder="Result..." value={result} readOnly={true}></textarea>
             <div style={{fontWeight: "bolder", color: valid?'green':'red'}}>{valid?'Valid':'Invalid'}</div>
         </div>
     )

@@ -35,12 +35,12 @@
 
 #title-box li {
     display: list-item;
-    margin: 5px;
+    margin-top: 10px;
 }
 #title-box a {
     display: block;
     box-sizing: inherit;
-    padding: 5px;
+    padding: 10px;
     border-radius: 5px;
     text-decoration: none; 
     color:black;
@@ -51,14 +51,16 @@
     color: rgb(0, 102, 204);
 }
 #title-box .active {
-    background-color: black!important;
-    color: white !important;
+    /*background-color: black!important;*/
+    /*color: white !important;*/
+    background-color: rgb(235, 242, 242)!important;
+    color: rgb(0, 102, 204)!important;
 }
 
 .comment-box {
     grid-area: comment;
     width: 100%;
-    background-color: aquamarine;
+    background-color: transparent;
     border-radius: 5px;
 }
 @media screen and (max-width: 1195px) {

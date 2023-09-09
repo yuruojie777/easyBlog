@@ -2,6 +2,8 @@
     background: #c6e7f5;
     height: 85vh;
     border-radius: 10px;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 .tools-container .menu-link {
     margin-left: 10px;

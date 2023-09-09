@@ -10,20 +10,16 @@ import "./css/index.css";
 import { Blog } from "./page/blog";
 import { Profile } from "./page/profile";
 import { New } from "./page/new";
-import { BlogCreatorPage } from "./page/blogCreatorPage";
 import { Article } from "./page/article";
 import { Home } from "./page/home";
 import { Gate } from "./page/gate";
-import {AuthContext} from "./context/authContext";
+import {AuthProvider} from "./context/authContext";
 import {Tools} from "./page/tools";
-import {Base64Decode} from "./page/base64Decode";
-import {JsonPrettify} from "./page/jsonPrettify";
-import {RandomGenerator} from "./page/randomGenerator";
-import {BcryptGenerator} from "./page/bcryptGenerator";
-import {Camera} from "./page/camera";
-import {MdEditor, MyEditor} from "./page/mdEditor";
+import {MyEditor} from "./page/mdEditor";
 import {Admin} from "./page/admin";
-
+import "./css/backgroud.css";
+import {GptChatroom} from "./page/gptChatroom";
+import {Chatroom} from "./page/chatroom";
 
 function App() {
   const [user, setUser] = useState({})
@@ -41,12 +37,10 @@ function App() {
         {
           path: "blog",
           element: <Blog/>,
-          children: [
-            {
-              path: ':blogId',
-              element: <Article/>,
-            }
-          ]
+        },
+        {
+          path: "article/:blogId",
+          element: <Article/>,
         },
         {
           path: "blog/new",
@@ -59,6 +53,10 @@ function App() {
         {
           path: "new",
           element: <New/>
+        },
+        {
+          path: "chatroom",
+          element: <Chatroom/>
         },
         {
           path: "tools",
@@ -81,9 +79,29 @@ function App() {
   ]);
   return (
     <div className="App">
-      <AuthContext.Provider value={provideValue}>
+      <AuthProvider value={provideValue}>
+        <body>
+        <div className="wrapper">
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+          <div><span className="dot"></span></div>
+        </div>
+        </body>
+
         <RouterProvider router={router} />
-      </AuthContext.Provider>
+      </AuthProvider>
     </div>
   );
 }

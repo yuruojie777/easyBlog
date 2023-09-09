@@ -1,7 +1,9 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import MDEditor from '@uiw/react-md-editor';
 import "../css/myEditor.css";
 import {Button, Input, message, Row} from "antd";
+import axios from "axios";
+import {post} from "../service/ApiService";
 export const MyEditor = () => {
     const [hasUnsavedChanges, setHasUnsavedChanges] = useState(true);
 
@@ -22,22 +24,34 @@ export const MyEditor = () => {
     const handleContentChange = () => {
         setHasUnsavedChanges(true);
     };
-    const [value, setValue] = React.useState(`# Linux command
-You must know something easy 
 
-![image](https://d1vk3m4dx2p0us.cloudfront.net/wp-content/uploads/sites/2/2023/06/ai-linux-tux.jpg)`);
+    const titleRef = useRef("");
+    const contentRef = useRef("");
+    const [value, setValue] = useState("");
     const handleOnSave = () => {
-        message.success("Success");
-        setHasUnsavedChanges(false);
+        const data = {
+            title: titleRef.current.input.value,
+            content: contentRef.current.markdown
+        }
+        console.log(data);
+        post(`/endpoint/ezblog/post`, data).then(() => {
+            message.success("Success");
+            setHasUnsavedChanges(false);
+            window.location.assign("/blog");
+        }).catch((e) => {
+            console.error(e);
+            message.error("Error");
+        })
     }
     return (
         <div className="container">
             <div style={{display: "flex", flexDirection: "row", gap: "10px", marginBottom: "10px"}}>
-                <Input placeholder="Input title" maxLength={100} showCount={true} size="large"/>
-                <Button type="primary" ghost shape="round" size="large" onClick={() => handleOnSave()}>Save</Button>
+                <Input ref={titleRef} placeholder="Input title" maxLength={100} showCount={true} size="large" />
+                <Button type="primary" size="large" onClick={() => handleOnSave()}>Save</Button>
             </div>
             <MDEditor
                 value={value}
+                ref={contentRef}
                 onChange={setValue}
                 height="90vh"
             />

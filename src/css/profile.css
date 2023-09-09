@@ -25,7 +25,7 @@
 .profile-container .info-box {
     padding: 10px;
     border-radius: 10px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
 }
 
 .background-container {
@@ -41,14 +41,17 @@
 
 .about-container {
     grid-area: about;
+    background-color: #d4e3fa;
 }
 
 .project-container {
     grid-area: project;
+    background-color: #d4e3fa;
 }
 
 .friend-box {
     grid-area: friend;
+    background-color: #d4e3fa;
 }
 
 
@@ -61,6 +64,7 @@
     border-style: solid;
     background-color: pink;
     background-position: center;
+    background-size: 100%;
 }
 
 .about-container img {
@@ -84,6 +88,7 @@
 
 .name-box p {
     margin: 5px 0;
+    color: white;
 }
 .education-box {
     display: flex;
