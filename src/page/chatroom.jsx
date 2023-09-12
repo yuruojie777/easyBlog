@@ -1,100 +1,141 @@
 import React, {useEffect, useRef, useState} from "react";
-import io from 'socket.io-client';
-import {post} from "../service/ApiService";
+import {get, post} from "../service/ApiService";
 import {Avatar, Button, Input} from "antd";
 import {SendOutlined} from "@ant-design/icons";
 import '../css/chatroom.css';
-export const Chatroom = () => {
+import SockJS from "sockjs-client";
+import {over} from 'stompjs';
+import {useSelector} from "react-redux";
+let stompClient = null;
+export const Chatroom = (props) => {
+    const [userData, setUserData] = useState(
+        {
+            sender: "",
+            username: "",
+            receiver: "",
+            connected: false,
+            content: ""
+        }
+    )
+    const [userInfo, setUserInfo] = useState(
+        {
+            username: "",
+            avatar: ""
+        }
+    )
+
+    const [avatars, setAvatars] = useState([]);
+    useEffect(() => {
+        get(`/endpoint/ezblog/user/avatars`).then(
+            (res) => {
+                setAvatars(res.data);
+                console.log(res);
+            }
+        )
+    }, []);
+
+    useEffect(() => {
+        get(`/endpoint/ezblog/user`).then(
+            (res) => {
+                console.log(res.data);
+                const email = res.data.email;
+                setUserInfo({
+                    username: res.data.username,
+                    avatar: res.data.imgBase64
+                })
+                setUserData(pre => (
+                    {...pre,
+                        username: email,
+                        sender: email,
+                    }
+                ));
+                // connect socket
+                let socket = new SockJS("/endpoint/ws");
+                // build stomp client
+                stompClient = over(socket);
+                // connect using stomp client
+                stompClient.connect({}, onConnected, onError);
+            }
+        )
+    },[])
     useEffect(() => {
         if (chatBoxRef.current) {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
         }
     })
+
+    function onPublicMessageReceived(payload) {
+        let res = JSON.parse(payload.body);
+        console.log(res);
+        if(res.sender !== userData.sender) {
+            setChatContent((prevState) => [...prevState, res]);
+            chatRef.current = [...chatRef.current, res];
+            console.log("sender is " + res.sender);
+            console.log("content is " + res.content);
+            props.onReceiveNewMessage(res.content, res.sender);
+        }
+    }
+
+    function onPrivateMessageReceived(payload) {
+        console.log(payload)
+    }
+
+    const onConnected = () => {
+        setUserData(pre => ({...pre, connected: true}));
+        // subscribe public and private topic
+        // public topic is to receive public message
+        stompClient.subscribe("/chatroom/public", onPublicMessageReceived);
+        // private topic is only to receive the messages that send to this user
+        stompClient.subscribe("/user/" + userData.username + "/private", onPrivateMessageReceived);
+        console.log(userData);
+    }
+
+    const onError = (err) => {
+        console.log(err);
+    }
     const [chatContent, setChatContent] = useState([]);
     const chatRef = useRef([]);
     const [text, setText] = useState("");
     const inputRef = useRef("");
     const chatBoxRef = useRef(null);
     const [loading, setLoading] = useState(false);
-    const socket = new WebSocket('ws://localhost/endpoint/app/message');
-    // socket.addEventListener('open', (event) => {
-    //     console.log('WebSocket Connection opened:', event);
-    //     socket.send('Hello, WebSocket Server!');
-    // });
-
-// Listen for messages
-    socket.addEventListener('message', (event) => {
-        console.log('WebSocket Message received:', event.data);
-    });
-
-// Handle errors
-//     socket.addEventListener('error', (event) => {
-//         console.error('WebSocket Error:', event);
-//     });
-
-// Connection closed
-//     socket.addEventListener('close', (event) => {
-//         console.log('WebSocket Connection closed:', event);
-//     });
     const onSend = () => {
-        setLoading(true);
         if(text.length !== 0) {
+            setLoading(true);
             const newContent = {
-                "sub": "sender",
-                "name": "Bob",
-                "role": "user",
+                "sender": userData.sender,
+                "username": userData.sender,
                 "content": inputRef.current.input.value,
                 "timestamp": new Date().getTime()
             }
-
-            setChatContent((prevState) => [...prevState, newContent]);
-            chatRef.current = [...chatRef.current, newContent];
-            console.log(chatRef.current);
-            post(`endpoint/ezblog/chat/message`, inputRef.current.input.value).then(
-                () => {
-                   setLoading(false);
-                }
-            )
-            // socket.send(inputRef.current.input.value);
+            stompClient.send("/app/message", {}, JSON.stringify(newContent));
             setText("");
-            // post(`/endpoint/ezblog/chat/gpt`, chatRef.current).then(
-            //     (res) => {
-            //         const response = {
-            //             "sub": "receiver",
-            //             "name": "Alice",
-            //             "role": "assistant",
-            //             "content": res.data,
-            //             "timestamp": new Date().getTime()
-            //         }
-            //         setChatContent((prevState) => [...prevState, response]);
-            //         chatRef.current = [...chatRef.current, response];
-            //         setLoading(false);
-            //     }
-            // )
+            setLoading(false);
         }
     }
-
+    const count = useSelector(state => state.counter.value)
     return (
         <div className="personal-chatroom-container">
             <div className="personal-chat-room-box" ref={chatBoxRef}>
                 {
                     chatContent.map(
                         (chat, index) => {
-                            if(chat.sub === "sender") {
+                            if(chat.sender === userData.sender) {
                                 return (
                                     <li key={index} style={{textAlign: "right"}}>
                                         <div className="personal-chat-block personal-chat-block-right">
                                             <span className="personal-chat-content-box personal-chat-right">{chat.content}</span>
                                             <Avatar
                                                 shape="square"
+                                                src={userInfo.avatar}
                                                 style={{
-                                                    backgroundColor: "blue",
+                                                    // backgroundColor: "pink",
                                                     verticalAlign: 'middle',
                                                     cursor: 'pointer'
                                                 }}
                                                 size="large"
                                             >
-                                                {chat.name}
+                                                {userData.sender}
                                             </Avatar>
                                         </div>
                                     </li>
@@ -106,13 +147,13 @@ export const Chatroom = () => {
                                             <Avatar
                                                 shape="square"
                                                 style={{
-                                                    backgroundColor: "pink",
+                                                    // backgroundColor: "pink",
                                                     verticalAlign: 'middle',
                                                     cursor: 'pointer'
                                                 }}
                                                 size="large"
+                                                src={avatars.find((elem) => elem.email === chat.sender).avatar}
                                             >
-                                                {chat.name}
                                             </Avatar>
                                             <span className="personal-chat-content-box personal-chat-left">{chat.content}</span>
                                         </div>

@@ -3,12 +3,14 @@ import {post} from "../service/ApiService";
 import {Avatar, Button, Input} from "antd";
 import {SendOutlined} from "@ant-design/icons";
 import '../css/gptChatroom.css';
+import {useAuth} from "../context/authContext";
 export const GptChatroom = () => {
     useEffect(() => {
         if (chatBoxRef.current) {
             chatBoxRef.current.scrollTop = chatBoxRef.current.scrollHeight;
         }
     })
+    const {user} = useAuth();
     const [chatContent, setChatContent] = useState([]);
     const chatRef = useRef([]);
     const [text, setText] = useState("");
@@ -32,7 +34,7 @@ export const GptChatroom = () => {
             console.log(chatRef.current);
             setText("");
 
-            post(`/endpoint/ezblog/chat/gpt`, chatRef.current).then(
+            post(`/endpoint/ezblog/ai/gpt`, chatRef.current).then(
                 (res) => {
                     const response = {
                         "sub": "receiver",
@@ -63,11 +65,11 @@ export const GptChatroom = () => {
                                             <Avatar
                                                 shape="square"
                                                 style={{
-                                                    backgroundColor: "blue",
                                                     verticalAlign: 'middle',
                                                     cursor: 'pointer'
                                                 }}
                                                 size="large"
+                                                src={user.imgBase64}
                                             >
                                                 {chat.name}
                                             </Avatar>
@@ -80,14 +82,14 @@ export const GptChatroom = () => {
                                         <div className="chat-block chat-block-left">
                                             <Avatar
                                                 shape="square"
+                                                src={'/resource/chatgpt-logo.jpg'}
                                                 style={{
-                                                    backgroundColor: "pink",
+                                                    // backgroundColor: "pink",
                                                     verticalAlign: 'middle',
                                                     cursor: 'pointer'
                                                 }}
                                                 size="large"
                                             >
-                                                {chat.name}
                                             </Avatar>
                                             <span className="chat-content-box chat-left">{chat.content}</span>
                                         </div>

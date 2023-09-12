@@ -1,12 +1,31 @@
 // AuthContext.js
-import { createContext, useState, useContext } from 'react';
-import {auth} from "../service/ApiService";
+import {createContext, useState, useContext, useEffect} from 'react';
+import {auth, get} from "../service/ApiService";
 import {message} from "antd";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
     const [user, setUser] = useState(null);
+    const [avatars, setAvatars] = useState([]);
+    useEffect(() => {
+        get(`/endpoint/ezblog/user/avatars`).then(
+            (res) => {
+                setAvatars(res.data);
+                console.log(res);
+            }
+        )
+    }, []);
+
+    useEffect(() => {
+        get(`/endpoint/ezblog/user`).then(
+            (res) => {
+                console.log(res.data);
+                setUser(res.data);
+
+            }
+        )
+    },[])
 
     const login = (form) => {
         auth(form).then(
@@ -30,7 +49,7 @@ export function AuthProvider({ children }) {
     };
 
     return (
-        <AuthContext.Provider value={{ user, login, logout }}>
+        <AuthContext.Provider value={{ user, avatars, login, logout }}>
             {children}
         </AuthContext.Provider>
     );

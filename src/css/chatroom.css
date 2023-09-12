@@ -1,6 +1,6 @@
 .personal-chatroom-container {
     width: 100%;
-    height: 100vh;
+    height: 100%;
 }
 
 .personal-chat-room-box {
@@ -38,8 +38,10 @@
 .personal-chat-content-box {
     background-color: #61dafb;
     max-width: 80%;
+    text-align: left;
     margin: 5px;
     padding: 5px;
+    word-wrap: break-word;
 }
 
 .personal-chat-left {

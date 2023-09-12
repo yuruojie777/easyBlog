@@ -10,14 +10,15 @@ import {get} from "../service/ApiService";
 dayjs.extend(customParseFormat);
 
 export const Profile = () => {
-    const [user, setUser] = useState(null);
-    useEffect(() => {
-        get(`/endpoint/ezblog/user`).then((res) => {
-            console.log("Now we got user info");
-            console.log(res.data);
-            setUser(res.data);
-        })
-    }, []);
+    const {user} = useAuth();
+    // const [user, setUser] = useState(null);
+    // useEffect(() => {
+    //     get(`/endpoint/ezblog/user`).then((res) => {
+    //         console.log("Now we got user info");
+    //         console.log(res.data);
+    //         setUser(res.data);
+    //     })
+    // }, []);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const handleOk = () => {
         setIsModalOpen(false);

@@ -27,7 +27,7 @@ const setAuthHeader = () => {
 export const get = async (uri) => {
     setAuthHeader();
     return instance.get(uri).catch(() => {
-        window.location.assign("/login");
+        // window.location.assign("/login");
     });
 }
 

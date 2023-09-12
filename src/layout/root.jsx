@@ -1,29 +1,39 @@
-import {CommentOutlined, GithubOutlined, InstagramOutlined, LinkedinOutlined} from '@ant-design/icons';
+import {CommentOutlined, GithubOutlined, InstagramOutlined, LinkedinOutlined, SmileOutlined} from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
-import {Avatar, Drawer, FloatButton} from 'antd';
+import {Avatar, Drawer, FloatButton, notification } from 'antd';
 import { Outlet, NavLink, useNavigate, Link} from "react-router-dom";
 import '../css/root.css';
 import React, { useEffect, useState} from "react";
 import {DropDownPanel} from "../component/dropdown/dropDownPanel";
 import {get} from "../service/ApiService";
 import {GptChatroom} from "../page/gptChatroom";
-
+import {Chatroom} from "../page/chatroom";
+import {useAuth} from "../context/authContext";
+import { useSelector, useDispatch } from 'react-redux'
+import { decrement, increment } from '../store/counterSlice'
 export default function Root() {
 
   const navigate = useNavigate();
-  const [user, setUser] = useState(null);
+  const {user} = useAuth();
   const [visible, setVisible] = useState(false);
+  const [numberOfUnreadMessages, setNumberOfUnreadMessages] = useState(0);
+  const count = useSelector(state => state.counter.value)
+  const dispatch = useDispatch()
 
-  useEffect(() => {
-    get(`/endpoint/ezblog/user`).then(
-        (res) => {
-          console.log(res.data);
-          setUser(res.data);
-        }
-    ).catch(() => {
-      window.location.assign("/login");
-    })
-  },[])
+  const [api, contextHolder] = notification.useNotification();
+  const openNotification = (message, username) => {
+    api.open({
+      message: username,
+      description: message,
+      icon: (
+          <SmileOutlined
+              style={{
+                color: '#108ee9',
+              }}
+          />
+      ),
+    });
+  };
   function handleOnClickHam (){
     const ham = document.getElementById("hamburger");
     const hidden_bars = document.getElementById("hidden-bars")
@@ -38,20 +48,46 @@ export default function Root() {
   const [open, setOpen] = useState(false);
   const showDrawer = () => {
     setOpen(true);
+    setNumberOfUnreadMessages(0);
+    console.log(open);
   };
   const onClose = () => {
     setOpen(false);
+    console.log(open);
   };
 
-
+  const addNumberOfUnreadMessage = (message, username) => {
+    console.log("username is " + username);
+    console.log("user email is " + user.email);
+    if(open && username !== user.email) {
+      setNumberOfUnreadMessages(prevState => prevState + 1);
+      openNotification(message, username);
+    }
+  }
     return (
       <div className="container">
+        {contextHolder}
         <FloatButton.Group shape="circle">
-          <FloatButton icon={<CommentOutlined />} onClick={showDrawer}/>
-          <FloatButton onClick={()=>window.location="/blog/new"} />
+          <FloatButton
+              icon={<CommentOutlined />}
+              onClick={() => dispatch(decrement())}
+          />
+          <FloatButton
+              icon={<CommentOutlined />}
+              onClick={() => dispatch(increment())}
+          />
+          <FloatButton
+              icon={<CommentOutlined />}
+              onClick={showDrawer}
+              badge={{
+                count: numberOfUnreadMessages,
+              }}
+              tooltip={<div>Open Chatroom</div>}
+          />
+          <FloatButton onClick={()=>window.location="/blog/new"} tooltip={<div>Write blog</div>}/>
         </FloatButton.Group>
         <Drawer title="Chatroom" placement="left" onClose={onClose} open={open} width={400}>
-          <GptChatroom/>
+          <Chatroom onReceiveNewMessage={(message, username) => addNumberOfUnreadMessage(message, username)}/>
         </Drawer>
         <div className="nav-bar">
           <nav>
@@ -72,7 +108,7 @@ export default function Root() {
                 <NavLink to="/tools" id="tools">Tools</NavLink>
               </li>
               <li>
-                <NavLink to="/chatroom" id="chatroom">Chatroom</NavLink>
+                <NavLink to="/chatroom" id="chatroom">GPT</NavLink>
               </li>
               {/*<li>*/}
               {/*  <NavLink to="/admin" id="admin">Admin</NavLink>*/}

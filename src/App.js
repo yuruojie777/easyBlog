@@ -20,6 +20,8 @@ import {Admin} from "./page/admin";
 import "./css/backgroud.css";
 import {GptChatroom} from "./page/gptChatroom";
 import {Chatroom} from "./page/chatroom";
+import store from './store/store'
+import { Provider } from 'react-redux'
 
 function App() {
   const [user, setUser] = useState({})
@@ -56,7 +58,7 @@ function App() {
         },
         {
           path: "chatroom",
-          element: <Chatroom/>
+          element: <GptChatroom/>
         },
         {
           path: "tools",
@@ -78,31 +80,30 @@ function App() {
     }
   ]);
   return (
-    <div className="App">
-      <AuthProvider value={provideValue}>
-        <body>
-        <div className="wrapper">
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
-          <div><span className="dot"></span></div>
+      <Provider store={store}>
+        <div className="App">
+          <AuthProvider value={provideValue}>
+            <div className="wrapper">
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+              <div><span className="dot"></span></div>
+            </div>
+            <RouterProvider router={router} />
+          </AuthProvider>
         </div>
-        </body>
-
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </div>
+      </Provider>
   );
 }
 
