@@ -1,6 +1,8 @@
 .personal-chatroom-container {
-    width: 100%;
+    width: 60%;
     height: 100%;
+    border-left: solid 1px #e8e8e8;
+    padding: 10px;;
 }
 
 .personal-chat-room-box {

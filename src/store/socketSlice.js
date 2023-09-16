@@ -1,19 +1,34 @@
 import { createSlice } from '@reduxjs/toolkit'
+import {get} from "../service/ApiService";
 
 export const socketSlice = createSlice({
     name: 'socket',
     initialState: {
         user: "",
-        connected: false,
+        avatarList: [],
     },
     reducers: {
         connectToWebsocket: state => {
-            state.value += 1;
-            console.log(state.value);
+            // let socket = new SockJS("/endpoint/ws");
+            // state.stompClient = over(socket);
+            // state.stompClient.connect(
+            //     {},
+            //     () => {
+            //         state.stompClient.subscribe("/chatroom/public", (payload) => {console.log(payload)});
+            //         // private topic is only to receive the messages that send to this user
+            //         state.stompClient.subscribe("/user/" + state.user.username + "/private", (payload) => {console.log(payload)});
+            //     },
+            //     (err) => {
+            //         console.log(err);
+            //     });
         },
-        decrement: state => {
-            state.value -= 1;
-            console.log(state.value);
+        getAvatars: state => {
+            get(`/endpoint/ezblog/user/avatars`).then(
+                (res) => {
+                    state.avatarList = res.data;
+                    console.log(res.data);
+                }
+            )
         },
         incrementByAmount: (state, action) => {
             state.value += action.payload
@@ -22,6 +37,6 @@ export const socketSlice = createSlice({
 })
 
 // Action creators are generated for each case reducer function
-export const { increment, decrement, incrementByAmount } = counterSlice.actions
+export const { connectToWebsocket, getAvatars, incrementByAmount } = socketSlice.actions
 
-export default counterSlice.reducer
+export default socketSlice.reducer

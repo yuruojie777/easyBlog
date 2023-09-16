@@ -1,0 +1,12 @@
+.friend-list-container {
+    width: 40%;
+    height: 100%;
+}
+
+.friend-list-container .user-friend-box{
+    cursor: default;
+}
+
+.friend-list-container .user-friend-box:hover{
+    background-color: #edeeee;
+}

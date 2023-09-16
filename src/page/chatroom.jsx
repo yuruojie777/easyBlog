@@ -6,24 +6,20 @@ import '../css/chatroom.css';
 import SockJS from "sockjs-client";
 import {over} from 'stompjs';
 import {useSelector} from "react-redux";
+import {useAuth} from "../context/authContext";
 let stompClient = null;
 export const Chatroom = (props) => {
+    const {user} = useAuth();
     const [userData, setUserData] = useState(
         {
-            sender: "",
-            username: "",
+            sender: user.email,
+            username: user.email,
             receiver: "",
             connected: false,
             content: ""
         }
     )
-    const [userInfo, setUserInfo] = useState(
-        {
-            username: "",
-            avatar: ""
-        }
-    )
-
+    console.log("user is " + JSON.stringify(userData))
     const [avatars, setAvatars] = useState([]);
     useEffect(() => {
         get(`/endpoint/ezblog/user/avatars`).then(
@@ -33,30 +29,13 @@ export const Chatroom = (props) => {
             }
         )
     }, []);
-
+    const connectToStompClient = () => {
+        let socket = new SockJS("/endpoint/ws");
+        stompClient = over(socket);
+        stompClient.connect({}, onConnected, onError);
+    }
     useEffect(() => {
-        get(`/endpoint/ezblog/user`).then(
-            (res) => {
-                console.log(res.data);
-                const email = res.data.email;
-                setUserInfo({
-                    username: res.data.username,
-                    avatar: res.data.imgBase64
-                })
-                setUserData(pre => (
-                    {...pre,
-                        username: email,
-                        sender: email,
-                    }
-                ));
-                // connect socket
-                let socket = new SockJS("/endpoint/ws");
-                // build stomp client
-                stompClient = over(socket);
-                // connect using stomp client
-                stompClient.connect({}, onConnected, onError);
-            }
-        )
+        connectToStompClient();
     },[])
     useEffect(() => {
         if (chatBoxRef.current) {
@@ -67,13 +46,9 @@ export const Chatroom = (props) => {
     function onPublicMessageReceived(payload) {
         let res = JSON.parse(payload.body);
         console.log(res);
-        if(res.sender !== userData.sender) {
-            setChatContent((prevState) => [...prevState, res]);
-            chatRef.current = [...chatRef.current, res];
-            console.log("sender is " + res.sender);
-            console.log("content is " + res.content);
-            props.onReceiveNewMessage(res.content, res.sender);
-        }
+        setChatContent((prevState) => [...prevState, res]);
+        chatRef.current = [...chatRef.current, res];
+        props.onReceiveNewMessage(res.content, res.sender);
     }
 
     function onPrivateMessageReceived(payload) {
@@ -82,16 +57,17 @@ export const Chatroom = (props) => {
 
     const onConnected = () => {
         setUserData(pre => ({...pre, connected: true}));
-        // subscribe public and private topic
-        // public topic is to receive public message
         stompClient.subscribe("/chatroom/public", onPublicMessageReceived);
-        // private topic is only to receive the messages that send to this user
         stompClient.subscribe("/user/" + userData.username + "/private", onPrivateMessageReceived);
+        props.onSocketConnected();
         console.log(userData);
     }
 
     const onError = (err) => {
         console.log(err);
+        console.log("auto reconnecting");
+        props.onSocketDisconnected();
+        connectToStompClient();
     }
     const [chatContent, setChatContent] = useState([]);
     const chatRef = useRef([]);
@@ -113,21 +89,20 @@ export const Chatroom = (props) => {
             setLoading(false);
         }
     }
-    const count = useSelector(state => state.counter.value)
     return (
         <div className="personal-chatroom-container">
             <div className="personal-chat-room-box" ref={chatBoxRef}>
                 {
                     chatContent.map(
                         (chat, index) => {
-                            if(chat.sender === userData.sender) {
+                            if(chat.sender === user.email) {
                                 return (
                                     <li key={index} style={{textAlign: "right"}}>
                                         <div className="personal-chat-block personal-chat-block-right">
                                             <span className="personal-chat-content-box personal-chat-right">{chat.content}</span>
                                             <Avatar
                                                 shape="square"
-                                                src={userInfo.avatar}
+                                                src={user.imgBase64}
                                                 style={{
                                                     // backgroundColor: "pink",
                                                     verticalAlign: 'middle',
@@ -135,7 +110,6 @@ export const Chatroom = (props) => {
                                                 }}
                                                 size="large"
                                             >
-                                                {userData.sender}
                                             </Avatar>
                                         </div>
                                     </li>

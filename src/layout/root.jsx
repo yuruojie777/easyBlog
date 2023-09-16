@@ -1,25 +1,27 @@
-import {CommentOutlined, GithubOutlined, InstagramOutlined, LinkedinOutlined, SmileOutlined} from '@ant-design/icons';
+import {
+  CommentOutlined,
+  GithubOutlined,
+  InstagramOutlined,
+  LinkedinOutlined,
+  LoadingOutlined,
+  SmileOutlined
+} from '@ant-design/icons';
 import { UserOutlined } from '@ant-design/icons';
-import {Avatar, Drawer, FloatButton, notification } from 'antd';
+import {Avatar, Badge, Drawer, FloatButton, notification, Spin} from 'antd';
 import { Outlet, NavLink, useNavigate, Link} from "react-router-dom";
 import '../css/root.css';
-import React, { useEffect, useState} from "react";
+import React, {useState} from "react";
 import {DropDownPanel} from "../component/dropdown/dropDownPanel";
-import {get} from "../service/ApiService";
-import {GptChatroom} from "../page/gptChatroom";
 import {Chatroom} from "../page/chatroom";
 import {useAuth} from "../context/authContext";
-import { useSelector, useDispatch } from 'react-redux'
-import { decrement, increment } from '../store/counterSlice'
+import {FriendList} from "../page/friendList";
 export default function Root() {
 
   const navigate = useNavigate();
   const {user} = useAuth();
   const [visible, setVisible] = useState(false);
   const [numberOfUnreadMessages, setNumberOfUnreadMessages] = useState(0);
-  const count = useSelector(state => state.counter.value)
-  const dispatch = useDispatch()
-
+  const [connected, setConnected] = useState(false);
   const [api, contextHolder] = notification.useNotification();
   const openNotification = (message, username) => {
     api.open({
@@ -70,24 +72,27 @@ export default function Root() {
         <FloatButton.Group shape="circle">
           <FloatButton
               icon={<CommentOutlined />}
-              onClick={() => dispatch(decrement())}
-          />
-          <FloatButton
-              icon={<CommentOutlined />}
-              onClick={() => dispatch(increment())}
-          />
-          <FloatButton
-              icon={<CommentOutlined />}
               onClick={showDrawer}
               badge={{
                 count: numberOfUnreadMessages,
               }}
-              tooltip={<div>Open Chatroom</div>}
           />
           <FloatButton onClick={()=>window.location="/blog/new"} tooltip={<div>Write blog</div>}/>
         </FloatButton.Group>
-        <Drawer title="Chatroom" placement="left" onClose={onClose} open={open} width={400}>
-          <Chatroom onReceiveNewMessage={(message, username) => addNumberOfUnreadMessage(message, username)}/>
+        <Drawer title={connected?<Badge status="success" text="Connected"/>:<Spin indicator={<LoadingOutlined
+            style={{
+              fontSize: 24,
+            }}
+            spin
+        />}>Connecting</Spin>} placement="left" onClose={onClose} open={open} width={700} bodyStyle={{paddingTop: 0, paddingBottom: 0, paddingRight: 0}}>
+          <div style={{display: "flex", flexDirection: "row", width: '100%', height: '100%', gap: '10px'}}>
+            <FriendList />
+            <Chatroom
+                onReceiveNewMessage={(message, username) => addNumberOfUnreadMessage(message, username)}
+                onSocketConnected={() => setConnected(true)}
+                onSocketDisconnected={() => setConnected(false)}
+            />
+          </div>
         </Drawer>
         <div className="nav-bar">
           <nav>
@@ -150,7 +155,7 @@ export default function Root() {
             <Link to="/">HOME</Link>
             <Link to="/blog">BLOG</Link>
             <Link to="/profile">PROFILE</Link>
-            <Link to="/chatroom">CHATROOM</Link>
+            <Link to="/chatroom">GPT</Link>
             <Link to="/tools">TOOLS</Link>
           </div>
         </div>

@@ -4,6 +4,8 @@ import {Avatar, Button, Input} from "antd";
 import {SendOutlined} from "@ant-design/icons";
 import '../css/gptChatroom.css';
 import {useAuth} from "../context/authContext";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 export const GptChatroom = () => {
     useEffect(() => {
         if (chatBoxRef.current) {
@@ -91,7 +93,9 @@ export const GptChatroom = () => {
                                                 size="large"
                                             >
                                             </Avatar>
-                                            <span className="chat-content-box chat-left">{chat.content}</span>
+                                            {/*<ReactMarkdown children={chat.content} remarkPlugins={[remarkGfm]} />*/}
+                                            {/*<span className="chat-content-box chat-left">{chat.content}</span>*/}
+                                            <span className="chat-content-box chat-left"><ReactMarkdown children={chat.content} remarkPlugins={[remarkGfm]} /></span>
                                         </div>
                                     </li>
                                 )
@@ -101,8 +105,13 @@ export const GptChatroom = () => {
                 }
             </div>
             <div className="chat-input-box">
-                <Input onPressEnter={onSend} ref={inputRef} value={text} onChange={e => setText(e.target.value)}/>
+                <Input onPressEnter={onSend}
+                       style={{height: '70px'}}
+                       ref={inputRef}
+                       value={text}
+                       onChange={e => setText(e.target.value)}/>
                 <Button type="primary"
+                        style={{height: '70px', width: '140px'}}
                         loading={loading}
                         onClick={() => onSend()}><SendOutlined /></Button>
             </div>

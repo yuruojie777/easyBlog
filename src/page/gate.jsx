@@ -1,6 +1,4 @@
 import React, {useContext, useRef, useState} from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from "../redux/actions";
 import '../css/gate.css'
 import {useAuth} from "../context/authContext";
 import {auth, register} from "../service/ApiService";
@@ -9,7 +7,6 @@ export const Gate = () => {
 
   const {login, user} = useAuth();
   const [loading, setLoading] = useState(false);
-  // const dispatch = useDispatch();
   const loginForm = useRef(
       {
         email: "",
@@ -34,13 +31,9 @@ export const Gate = () => {
   function handleOnLoginSubmit(e) {
     e.preventDefault();
     setLoading(true);
-    // login(loginForm.current);
-    // dispatch(login(user))
     auth(loginForm.current).then(
         res => {
           if(res.status === 200) {
-            // setUser(res.data.email)
-            // console.log(res.data);
             message.success("Successfully login", 0.5).then(() => {
               window.location.assign("/");
             })

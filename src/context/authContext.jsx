@@ -22,7 +22,6 @@ export function AuthProvider({ children }) {
             (res) => {
                 console.log(res.data);
                 setUser(res.data);
-
             }
         )
     },[])
