@@ -93,9 +93,9 @@ export const GptChatroom = () => {
                                                 size="large"
                                             >
                                             </Avatar>
-                                            {/*<ReactMarkdown children={chat.content} remarkPlugins={[remarkGfm]} />*/}
-                                            {/*<span className="chat-content-box chat-left">{chat.content}</span>*/}
-                                            <span className="chat-content-box chat-left"><ReactMarkdown children={chat.content} remarkPlugins={[remarkGfm]} /></span>
+                                            <span className="chat-content-box chat-left">
+                                                <ReactMarkdown children={chat.content} remarkPlugins={[remarkGfm]} />
+                                            </span>
                                         </div>
                                     </li>
                                 )

@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useRef, useState} from 'react'
 import '../css/profile.css';
 import '../css/projectBox.css'
 import {CommentOutlined, EditOutlined} from '@ant-design/icons';
-import {Button, FloatButton, Form, Input, Modal} from 'antd';
+import {Button, Card, FloatButton, Form, Input, Modal} from 'antd';
 import {useAuth} from "../context/authContext";
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
@@ -26,6 +26,10 @@ export const Profile = () => {
     const handleCancel = () => {
         setIsModalOpen(false);
     }
+    const gridStyle = {
+        width: '25%',
+        textAlign: 'center',
+    };
   return (
     <div className='profile-container'>
         <Modal title="Personal Info"
@@ -60,7 +64,16 @@ export const Profile = () => {
         <Button type="primary" shape="circle" icon={<EditOutlined />} onClick={() => setIsModalOpen(true)}/>
       </div>
       <div className='about-container info-box'>
-          About me
+          <Card>
+              <Card.Grid style={gridStyle}>Content</Card.Grid>
+              <Card.Grid style={gridStyle}>Content</Card.Grid>
+              <Card.Grid style={gridStyle}><Input/></Card.Grid>
+              <Card.Grid style={gridStyle}>Content</Card.Grid>
+              <Card.Grid style={gridStyle}>Content</Card.Grid>
+              <Card.Grid style={gridStyle}>Content</Card.Grid>
+              <Card.Grid style={gridStyle}>Content</Card.Grid>
+              <Card.Grid style={gridStyle}>Content</Card.Grid>
+          </Card>
       </div>
       <div className='project-container info-box'>This is project area</div>
       <div className='friend-box info-box'>These are people you may know</div>

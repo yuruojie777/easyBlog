@@ -5,7 +5,7 @@ import "../css/wordSearch.css";
 import {Button, Card, List, Modal, Result, Space, Spin, Typography} from "antd";
 import Meta from "antd/es/card/Meta";
 import {WordCardModal} from "../component/modal/wordCardModal";
-import {StarFilled, StarOutlined} from "@ant-design/icons";
+import {SoundFilled, StarFilled, StarOutlined} from "@ant-design/icons";
 const { Text, Link } = Typography;
 export const WordSearch = () => {
     const [result, setResult] = useState([]);
@@ -94,6 +94,10 @@ export const WordSearch = () => {
         setShowDetail(true);
         console.log(word);
     }
+    const handleOnPlayAudio = () => {
+        if(wordDetail.audio !== null)
+        new Audio(wordDetail.audio).play();
+    }
     return (
         <div>
             <div className="word-search-container">
@@ -155,7 +159,8 @@ export const WordSearch = () => {
                             :<StarOutlined style={{float: "right"}} onClick={() => {setStar(!star)}}/>}
                         </span>
                     } />
-                    {(wordDetail?.phoneticSymbol === null || wordDetail?.phoneticSymbol === '')?'':(<p>/&nbsp;{wordDetail?.phoneticSymbol}&nbsp;/</p>)}
+                    {(wordDetail?.phoneticSymbol === null || wordDetail?.phoneticSymbol === '')?''
+                        :(<p>/&nbsp;{wordDetail?.phoneticSymbol}&nbsp;/&nbsp;&nbsp;<SoundFilled onClick={handleOnPlayAudio}/></p>)}
                     {
                         wordDetail?.definitions.map((def, index) => {
                             return (

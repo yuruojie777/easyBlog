@@ -79,12 +79,16 @@ export default function Root() {
           />
           <FloatButton onClick={()=>window.location="/blog/new"} tooltip={<div>Write blog</div>}/>
         </FloatButton.Group>
-        <Drawer title={connected?<Badge status="success" text="Connected"/>:<Spin indicator={<LoadingOutlined
-            style={{
-              fontSize: 24,
-            }}
-            spin
-        />}>Connecting</Spin>} placement="left" onClose={onClose} open={open} width={700} bodyStyle={{paddingTop: 0, paddingBottom: 0, paddingRight: 0}}>
+        <Drawer
+            title={connected?
+                <Badge status="success" text="Connected"/>:
+                <Spin indicator={<LoadingOutlined style={{fontSize: 24}} spin/>}>Connecting</Spin>}
+            placement="left"
+            onClose={onClose}
+            open={open}
+            width={700}
+            bodyStyle={{paddingTop: 0, paddingBottom: 0, paddingRight: 0}}
+        >
           <div style={{display: "flex", flexDirection: "row", width: '100%', height: '100%', gap: '10px'}}>
             <FriendList />
             <Chatroom
